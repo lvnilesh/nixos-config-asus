@@ -47,8 +47,6 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    # driSupport = true; # Direct Rendering Infrastructure
-    # driSupport32Bit = true; # For 32-bit games/apps (Steam, Wine)
     # NixOS automatically selects the correct OpenGL implementation (NVIDIA's)
     # when services.xserver.videoDrivers includes "nvidia".
   };
@@ -74,20 +72,25 @@
     nvidiaSettings = true;
   };
 
-  # --- NVIDIA Container Toolkit Configuration (Updated based on warnings) ---
-  # This is the NEW way to enable GPU support in containers
-  hardware.nvidia-container-toolkit.enable = true;
 
   # --- Docker Configuration ---
   virtualisation.docker = {
     enable = true;
+    
     # Enable support for the NVIDIA Container Runtime -> GPU access
-    # enableNvidia = true;
-    # Added a new top-level option hardware.nvidia-container-toolkit.enable = true;
+    enableNvidia = true; # KEEP THIS FOR NOW.
+
     # Optional: Specify Docker package if needed, otherwise uses default
     # package = pkgs.docker;
   };
 
+  # --- NVIDIA Container Toolkit Configuration (Updated based on warnings) ---
+  # This is the NEW way to enable GPU support in containers
+  hardware.nvidia-container-toolkit.enable = true;
+  
+  # Despite that, GPU support in containers wont work without # virtualisation.docker.enableNvidia = true;
+  # docker run --rm --runtime=nvidia --device nvidia.com/gpu=all ubuntu nvidia-smi
+  # docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 
  # Enable Flatpak service
   services.flatpak.enable = true;
