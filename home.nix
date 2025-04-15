@@ -28,6 +28,61 @@
     # Add your desired user applications here
   ];
 
+  # Enable Zsh and configure Oh My Zsh
+  programs.zsh = {
+    enable = true;  # Enable Zsh management by Home Manager
+
+    # Enable Oh My Zsh
+    ohMyZsh = {
+      enable = true;
+      # Optional: Specify theme (e.g., "robbyrussell", "agnoster"). Find themes in ~/.oh-my-zsh/themes
+      theme = "robbyrussell";
+      # Optional: Specify plugins (e.g., "git", "sudo", "docker"). Find plugins in ~/.oh-my-zsh/plugins
+      plugins = [
+        "git"
+        "sudo"
+        "history"
+        # Add other desired plugins here
+      ];
+      # Optional: Add custom plugins/themes from external sources if needed
+      # custom = "/path/to/your/custom/oh-my-zsh/stuff";
+    };
+
+    # Optional: Set Zsh as the default shell for this user directly from Home Manager
+    # This often works well, but see note below about configuration.nix
+    enableCompletion = true; # Enable Zsh completions
+    autosuggestion.enable = true; # Enable zsh-autosuggestions
+    syntaxHighlighting.enable = true; # Enable zsh-syntax-highlighting
+
+    # Optional: Add custom aliases
+    shellAliases = {
+      ll = "ls -l";
+      ls = "ls --color=auto";
+      grep = "grep --color=auto";
+      nvim = "nvim";
+      vim = "nvim";
+      "..=" = "cd ..";
+    };
+
+    # Optional: Add lines to the beginning of .zshrc
+    # initExtraBeforeCompInit = ''
+    #   export SOME_VAR="some_value"
+    # '';
+
+    # Optional: Add lines to the end of .zshrc
+    initExtra = ''
+      # Make sure nix binaries are available
+      export PATH="$HOME/.nix-profile/bin:$PATH"
+
+      # Any other custom Zsh commands or settings
+      # Example: Start Starship prompt if installed via home.packages
+      # if command -v starship &> /dev/null; then
+      #   eval "$(starship init zsh)"
+      # fi
+    '';
+  };
+
+
   programs.vscode = {
     enable = true;
 
