@@ -146,6 +146,7 @@
     shell = pkgs.zsh;
     packages = with pkgs; [
       tree
+      zsh
     ];
   };
 
