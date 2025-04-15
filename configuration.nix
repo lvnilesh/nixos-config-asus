@@ -146,7 +146,6 @@
     packages = with pkgs; [
       tree
     ];
-    shell = pkgs.zsh;
   };
 
   programs.firefox.enable = true;
