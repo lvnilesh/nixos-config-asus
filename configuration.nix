@@ -98,7 +98,7 @@
     enable = true;
     
     # Enable support for the NVIDIA Container Runtime -> GPU access
-    enableNvidia = true; # KEEP THIS FOR NOW.
+    enableNvidia = true; # KEEP THIS FOR NOW. https://github.com/NixOS/nixpkgs/issues/363505
 
     # Optional: Specify Docker package if needed, otherwise uses default
     # package = pkgs.docker;
