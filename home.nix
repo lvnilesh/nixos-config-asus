@@ -89,11 +89,11 @@
   # Zsh configuration example (optional)
   programs.zsh = {
     enable = true;
-    ohMyZsh = {        # <--- ohMyZsh is an attribute set
-      enable = true;   # <--- enable goes inside it
+#    ohMyZsh = {        # <--- ohMyZsh is an attribute set
+#      enable = true;   # <--- enable goes inside it
       # Optional: theme = "robbyrussell";
       # Optional: plugins = [ "git" ];
-    };  
+#    };  
   };
 
   # Manage dotfiles
@@ -124,5 +124,4 @@
 
   # Enable user services (e.g., syncthing)
   # services.syncthing.enable = true;
-
 }
