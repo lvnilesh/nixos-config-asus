@@ -11,6 +11,7 @@ aliases
 ```
 alias code="flatpak run com.visualstudio.code"
 alias rb="sudo nixos-rebuild switch"
+alias arb="sudo nixos-rebuild switch --flake .#asus"
 alias g="git"
 ```
 gitaliases
