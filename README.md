@@ -33,3 +33,12 @@ Test
 docker run --rm --runtime=nvidia --device nvidia.com/gpu=all ubuntu nvidia-smi
 docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 ```
+
+generate hardware config
+
+```
+sudo nixos-generate-config --show-hardware-config > ~/nixos-config/hardware-configuration.nix
+```
+
+
+sudo nixos-rebuild switch --flake .#asus

@@ -14,7 +14,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nuc"; # Define your hostname.
+  networking.hostName = "asus"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -33,6 +33,26 @@
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
+
+
+  # Enable Nix Flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Optional: Auto-run garbage collection to save disk space
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 7d";
+  };
+
+  # Ensure Flakes can access the registry correctly
+  nix.settings.substituters = ["https://cache.nixos.org/"];
+  nix.settings.trusted-public-keys = ["cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="];
+
+  # Optional: Enable nix-direnv integration if you use direnv
+  # programs.direnv.enable = true;
+  # programs.direnv.nix-direnv.enable = true;
+
+
 
   # Enable the X11 windowing system.
   services.xserver = {
