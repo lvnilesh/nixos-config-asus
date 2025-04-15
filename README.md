@@ -1,14 +1,24 @@
+flatpak
+```
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+```
 
+aliases
+```
+alias code="flatpak run com.visualstudio.code"
+alias rb="sudo nixos-rebuild switch"
+alias g="git"
+```
+gitaliases
+
+cleanup 
+```
 sudo nix-collect-garbage --delete-older-than 30d
 sudo nixos-rebuild boot — upgrade
 flatpak update -y
 
 sudo nix-collect-garbage -d
-
-alias code="flatpak run com.visualstudio.code"
-alias rb="sudo nixos-rebuild switch"
-alias g="git"
+```
 
 
 To remove all but the most recent boot entry run: 
