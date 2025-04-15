@@ -93,7 +93,7 @@
     ".config/my-app".source = ./dotfiles/my-app; # Assuming you have ./dotfiles/my-app
 
     # Example: Symlink a file
-    ".config/nvim/init.vim".source = ./dotfiles/nvim/init.vim;
+    # ".config/nvim/init.vim".source = ./dotfiles/nvim/init.vim;
 
     # Example: Create a file with specific text content
     ".my-custom-file".text = ''
