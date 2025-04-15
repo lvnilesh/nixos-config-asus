@@ -95,8 +95,6 @@
       # Optional: plugins = [ "git" ];
     };  
   };
-  # If you enable zsh here, make sure NixOS config doesn't force bash
-  users.users.cloudgenius.shell = pkgs.zsh; # You can set it here too
 
   # Manage dotfiles
   home.file = {
