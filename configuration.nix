@@ -184,6 +184,7 @@
     gnome-software
     glxinfo      # Useful for checking OpenGL rendering (part of mesa-utils)
     cudatoolkit
+    opentofu
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
