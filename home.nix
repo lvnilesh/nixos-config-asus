@@ -86,15 +86,17 @@
     userEmail = "nilesh@cloudgeni.us";
   };
 
+  programs.zsh.enable = true;
+
   # Zsh configuration example (optional)
-  programs.zsh = {
-    enable = true;
+  # programs.zsh = {
+  #  enable = true;
 #    ohMyZsh = {        # <--- ohMyZsh is an attribute set
 #      enable = true;   # <--- enable goes inside it
       # Optional: theme = "robbyrussell";
       # Optional: plugins = [ "git" ];
 #    };  
-  };
+# };
 
   # Manage dotfiles
   home.file = {
