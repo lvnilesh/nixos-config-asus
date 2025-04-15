@@ -149,7 +149,22 @@
       zsh
     ];
   };
-  programs.zsh.enable = true;
+
+  programs = {
+    zsh = {
+      enable = true;
+      ohMyZsh = {
+        enable = true;
+        theme = "robbyrussell";
+        plugins = [
+          "sudo"
+          "terraform"
+          "systemadmin"
+          "vi-mode"
+        ];
+      };
+    };
+  };
 
   programs.firefox.enable = true;
 

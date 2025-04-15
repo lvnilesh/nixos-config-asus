@@ -28,8 +28,6 @@
     # Add your desired user applications here
   ];
 
-  programs.zsh.enable = true;
-
   programs.vscode = {
     enable = true;
 
