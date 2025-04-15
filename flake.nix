@@ -8,7 +8,7 @@
 
     # Home Manager
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.11";
       # Make sure Home Manager uses the same nixpkgs revision
       inputs.nixpkgs.follows = "nixpkgs";
     };

@@ -40,5 +40,5 @@ generate hardware config
 sudo nixos-generate-config --show-hardware-config > ~/nixos-config/hardware-configuration.nix
 ```
 
-
+nix flake update
 sudo nixos-rebuild switch --flake .#asus
