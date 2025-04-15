@@ -1,6 +1,10 @@
 flatpak
 ```
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+flatpak uninstall com.visualstudio.code
+
+flatpak uninstall --unused
 ```
 
 aliases
