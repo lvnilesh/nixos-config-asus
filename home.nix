@@ -89,8 +89,11 @@
   # Zsh configuration example (optional)
   programs.zsh = {
     enable = true;
-    ohMyZsh.enable = true; # If you want oh-my-zsh
-    # You can add plugins, aliases, etc. here
+    ohMyZsh = {        # <--- ohMyZsh is an attribute set
+      enable = true;   # <--- enable goes inside it
+      # Optional: theme = "robbyrussell";
+      # Optional: plugins = [ "git" ];
+    };  
   };
   # If you enable zsh here, make sure NixOS config doesn't force bash
   users.users.cloudgenius.shell = pkgs.zsh; # You can set it here too
