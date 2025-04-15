@@ -24,8 +24,8 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  swapDevices = [ 
-    { device = "/dev/disk/by-uuid/65fd9f98-b0ca-4cbe-a1cc-f0c6e0da18a5"; } # Added the placeholder entry
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/65fd9f98-b0ca-4cbe-a1cc-f0c6e0da18a5"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

@@ -133,6 +133,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
+  # for global user
+  users.defaultUserShell=pkgs.zsh; 
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.cloudgenius = {
     initialPassword = "cdcd";
@@ -150,19 +153,29 @@
     ];
   };
 
+  # enable zsh and oh my zsh
   programs = {
     zsh = {
-      enable = true;
-      ohMyZsh = {
         enable = true;
-        theme = "robbyrussell";
-        plugins = [
-          "sudo"
-          "terraform"
-          "systemadmin"
-          "vi-mode"
-        ];
-      };
+        autosuggestions.enable = true;
+        zsh-autoenv.enable = true;
+        syntaxHighlighting.enable = true;
+        ohMyZsh = {
+          enable = true;
+          theme = "robbyrussell";
+          plugins = [
+            "git"
+            "npm"
+            "history"
+            "node"
+            "rust"
+            "deno"
+            "sudo"
+            "terraform"
+            "systemadmin"
+            "vi-mode"           
+          ];
+        };
     };
   };
 

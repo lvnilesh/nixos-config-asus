@@ -9,7 +9,7 @@ flatpak uninstall --unused
 
 aliases
 ```
-alias code="flatpak run com.visualstudio.code"
+# alias code="flatpak run com.visualstudio.code"
 alias rb="sudo nixos-rebuild switch"
 alias arb="sudo nixos-rebuild switch --flake .#asus"
 alias g="git"
@@ -18,11 +18,12 @@ gitaliases
 
 cleanup 
 ```
-sudo nix-collect-garbage --delete-older-than 30d
-sudo nixos-rebuild boot — upgrade
 flatpak update -y
-
+sudo nixos-rebuild boot — upgrade
 sudo nix-collect-garbage -d
+
+sudo nix-collect-garbage --delete-older-than 30d
+
 ```
 
 
