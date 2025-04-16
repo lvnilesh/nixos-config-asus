@@ -52,11 +52,6 @@
   
   home.file.".config/qtile".source = /home/cloudgenius/nixos-config/qtile;
 
-  home.packages = with pkgs; [
-    bat
-    neofetch
-  ];
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -68,6 +63,8 @@
     vlc
     unzip
     # Add your desired user applications here
+    bat
+    neofetch
   ];
 
   programs.vscode = {
