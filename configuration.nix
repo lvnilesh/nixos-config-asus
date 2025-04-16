@@ -4,18 +4,26 @@
 
 { config, lib, pkgs, ... }:
 
+let home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./vscode.nix
+      (import "${home-manager}/nixos" )
     ];
 
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.backupFileExtension = "backup";
+  home-manager.users.cloudgenius = import ./home.nix;
+  
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nuc"; # Define your hostname.
+  networking.hostName = "asus"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -39,7 +47,28 @@
   services.xserver = {
     enable = true;
     videoDrivers = ["nvidia"];
+    windowManager.qtile.enable = true;
+    extraConfig = ''
+      Section "Monitor"
+        Identifier "Virtual-1"
+        Option "PreferredMode" "3840x2160"
+      EndSection
+    '';
+		displayManager.sessionCommands = ''
+			xwallpaper --zoom /home/cloudgenius/nixos-config/wall/eog-wallpaper.png
+			xset r rate 200 35 &
+		'';
   };
+
+	services.picom = {
+		enable = true;
+		backend = "glx";
+		fade = true;
+	};
+
+	fonts.packages = with pkgs; [
+		jetbrains-mono
+	];
 
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -147,6 +176,13 @@
     gnome-software
     glxinfo      # Useful for checking OpenGL rendering (part of mesa-utils)
     cudatoolkit
+    
+		neovim
+		alacritty
+		xwallpaper
+		pcmanfm
+		rofi
+		pfetch
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
