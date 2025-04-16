@@ -149,10 +149,11 @@ in
     description = "Nilesh";
     isNormalUser = true;
     extraGroups = [ 
-      "wheel" 
+      "wheel" # Enable ‘sudo’ for the user. 
       "networkmanager"
       "docker"
-    ]; # Enable ‘sudo’ for the user.
+      "libvirtd"
+    ];
     packages = with pkgs; [
       tree
     ];
@@ -184,6 +185,20 @@ in
 		rofi
 		pfetch
   ];
+
+  # Virt manager
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+
+
+  networking.interfaces.eno1.useDHCP = true;
+  networking.interfaces.br0.useDHCP = true;
+  networking.bridges = {
+    "br0" = {
+      interfaces = [ "eno1" ];
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
