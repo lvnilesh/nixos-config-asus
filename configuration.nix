@@ -43,6 +43,26 @@ in
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+
+  # Enable Nix Flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Optional: Auto-run garbage collection to save disk space
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 7d";
+  };
+
+  # Ensure Flakes can access the registry correctly
+  nix.settings.substituters = ["https://cache.nixos.org/"];
+  nix.settings.trusted-public-keys = ["cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="];
+
+  # Optional: Enable nix-direnv integration if you use direnv
+  # programs.direnv.enable = true;
+  # programs.direnv.nix-direnv.enable = true;
+
+
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -108,7 +128,7 @@ in
     enable = true;
     
     # Enable support for the NVIDIA Container Runtime -> GPU access
-    enableNvidia = true; # KEEP THIS FOR NOW.
+    enableNvidia = true; # KEEP THIS FOR NOW. https://github.com/NixOS/nixpkgs/issues/363505
 
     # Optional: Specify Docker package if needed, otherwise uses default
     # package = pkgs.docker;
@@ -143,20 +163,54 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
+  # for global user
+  users.defaultUserShell=pkgs.zsh; 
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.cloudgenius = {
     initialPassword = "cdcd";
     description = "Nilesh";
     isNormalUser = true;
     extraGroups = [ 
+
       "wheel" # Enable ‘sudo’ for the user. 
       "networkmanager"
       "docker"
       "libvirtd"
     ];
+    
+    shell = pkgs.zsh;
+
     packages = with pkgs; [
       tree
+      zsh
     ];
+  };
+
+  # enable zsh and oh my zsh
+  programs = {
+    zsh = {
+        enable = true;
+        autosuggestions.enable = true;
+        zsh-autoenv.enable = true;
+        syntaxHighlighting.enable = true;
+        ohMyZsh = {
+          enable = true;
+          theme = "robbyrussell";
+          plugins = [
+            "git"
+            "npm"
+            "history"
+            "node"
+            "rust"
+            "deno"
+            "sudo"
+            "terraform"
+            "systemadmin"
+            "vi-mode"           
+          ];
+        };
+    };
   };
 
   programs.firefox.enable = true;
@@ -184,6 +238,8 @@ in
 		pcmanfm
 		rofi
 		pfetch
+    opentofu
+
   ];
 
   # Virt manager

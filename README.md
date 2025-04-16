@@ -19,6 +19,7 @@ gitaliases
 cleanup 
 ```
 flatpak update -y
+
 sudo nixos-rebuild boot --upgrade
 sudo nixos-rebuild switch
 
