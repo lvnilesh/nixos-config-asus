@@ -4,7 +4,7 @@
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "cloudgenius";
-  home.homeDirectory = "/home/cloudgenius";
+#  home.homeDirectory = "/home/cloudgenius";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -15,7 +15,8 @@
   # changes in each release.
   home.stateVersion = "24.11"; # Set to your current NixOS/HM version
 
-
+  # --- Ensure Fontconfig is enabled for user fonts (Often enabled by default, but good practice) ---
+  fonts.fontconfig.enable = true;
 
   
   programs.bash = {
@@ -50,7 +51,7 @@
     --paging=auto
   '';
   
-  home.file.".config/qtile".source = /home/cloudgenius/nixos-config/qtile;
+  home.file.".config/qtile".source = ./qtile;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -63,6 +64,7 @@
     unzip
     bat
     neofetch
+    jetbrains-mono
   ];
 
   programs.vscode = {
@@ -96,14 +98,17 @@
 
     # --- Optional: Manage User Settings (settings.json) ---
     # Uncomment and add settings you want managed by Home Manager
-    # userSettings = {
-    #   "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'monospace', monospace";
-    #   "editor.fontSize" = 14;
-    #   "workbench.colorTheme" = "Default Dark+";
-    #   "files.autoSave" = "onFocusChange";
-    #   "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
-    #   # Add other settings here
-    # };
+
+    userSettings = {
+    "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'monospace', monospace";
+    "editor.fontSize" = 16;    
+    "editor.fontLigatures" = true; # --- Optional: Enable Font Ligatures (JetBrains Mono supports them) ---
+
+    "workbench.colorTheme" = "Default Dark+";
+    "files.autoSave" = "onFocusChange";
+    "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
+    
+    };
 
     # --- Optional: Manage Keybindings (keybindings.json) ---
     # userKeybindings = [
@@ -113,14 +118,6 @@
     #   }
     # ];
 
-  };
-
-
-  # Basic git configuration
-  programs.git = {
-    enable = true;
-    userName = "Nilesh";
-    userEmail = "nilesh@cloudgeni.us";
   };
 
 

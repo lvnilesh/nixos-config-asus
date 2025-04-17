@@ -4,22 +4,26 @@
 
 { config, lib, pkgs, ... }:
 
-let home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
+let home-manager = builtins.fetchTarball {
+  url = "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
+  sha256 = "024jcyjxsr0cj4ycz4r8i60bydrl13l6vc16innv6wq32rcgyacb";
+};
 in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      (import "${home-manager}/nixos" )
+
       ./apps.nix
 
+      # (import "${home-manager}/nixos" )
       # ./unused-vscode.nix
     ];
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "backup";
-  home-manager.users.cloudgenius = import ./home.nix;
+#  home-manager.users.cloudgenius = import ./home.nix;
   
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
