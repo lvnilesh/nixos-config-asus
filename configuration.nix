@@ -10,8 +10,10 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./vscode.nix
       (import "${home-manager}/nixos" )
+      ./apps.nix
+
+      # ./unused-vscode.nix
     ];
 
   home-manager.useUserPackages = true;
@@ -80,11 +82,11 @@ in
 		'';
   };
 
-	services.picom = {
-		enable = true;
-		backend = "glx";
-		fade = true;
-	};
+# services.picom = {
+#		enable = true;
+#		backend = "glx";
+#		fade = true;
+#	};
 
 	fonts.packages = with pkgs; [
 		jetbrains-mono
@@ -92,6 +94,8 @@ in
 
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+  
+  services.gnome.gnome-initial-setup.enable = false;
   
   # Configure Hardware OpenGL and Vulkan to use NVIDIA
   hardware.graphics = {
@@ -224,21 +228,6 @@ in
     curl
     git
     wget
-    gnome-tweaks
-    btop
-    htop
-    flatpak
-    gnome-software
-    glxinfo      # Useful for checking OpenGL rendering (part of mesa-utils)
-    cudatoolkit
-    
-		neovim
-		alacritty
-		xwallpaper
-		pcmanfm
-		rofi
-		pfetch
-    opentofu
 
   ];
 

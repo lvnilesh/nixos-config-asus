@@ -35,7 +35,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      window.opacity = 0.9;
+      window.opacity = 1.0;
       font.normal = {
         family = "JetBrains Mono";
         style = "Regular";
@@ -59,10 +59,8 @@
   home.packages = with pkgs; [
     firefox
     htop
-    neovim # Example text editor
     vlc
     unzip
-    # Add your desired user applications here
     bat
     neofetch
   ];
@@ -132,7 +130,7 @@
     ".config/my-app".source = ./dotfiles/my-app; # Assuming you have ./dotfiles/my-app
 
     # Example: Symlink a file
-    ".config/nvim/init.vim".source = ./dotfiles/nvim/init.vim;
+    ".gitconfig".source = ./dotfiles/.gitconfig;
 
     # Example: Create a file with specific text content
     ".my-custom-file".text = ''
@@ -144,7 +142,7 @@
 
   # Example: Configure environment variables
   home.sessionVariables = {
-    EDITOR = "nvim";
+    EDITOR = "vi";
     # MY_API_KEY = "secret"; # DON'T DO THIS! Use secrets management.
   };
 
