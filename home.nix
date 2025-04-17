@@ -107,7 +107,7 @@
     "workbench.colorTheme" = "Default Dark+";
     "files.autoSave" = "onFocusChange";
     "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
-    
+    "git.confirmSync" = false;
     };
 
     # --- Optional: Manage Keybindings (keybindings.json) ---
