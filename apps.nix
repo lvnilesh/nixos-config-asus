@@ -28,6 +28,7 @@
       opentofu
 
       albert
+      pciutils
     ];
   };
 }

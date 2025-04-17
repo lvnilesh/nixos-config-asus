@@ -100,14 +100,15 @@
     # Uncomment and add settings you want managed by Home Manager
 
     userSettings = {
-    "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'monospace', monospace";
-    "editor.fontSize" = 16;    
-    "editor.fontLigatures" = true; # --- Optional: Enable Font Ligatures (JetBrains Mono supports them) ---
+      "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'monospace', monospace";
+      "editor.fontLigatures" = true; # --- Optional: Enable Font Ligatures (JetBrains Mono supports them) ---
+      "editor.fontSize" = 16;    
 
-    "workbench.colorTheme" = "Default Dark+";
-    "files.autoSave" = "onFocusChange";
-    "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
-    "git.confirmSync" = false;
+      "files.autoSave" = "onFocusChange";
+      "git.confirmSync" = false;
+      "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
+      "workbench.colorTheme" = "Default Dark+";
+      "workbench.startupEditor" = "none";
     };
 
     # --- Optional: Manage Keybindings (keybindings.json) ---

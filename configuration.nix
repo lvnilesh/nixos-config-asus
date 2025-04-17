@@ -96,11 +96,16 @@ in
 		jetbrains-mono
 	];
 
+  # services.xserver.displayManager.autoLogin.enable = true;
+  # services.xserver.displayManager.autoLogin.user = "cloudgenius";
+
+  # services.xserver.displayManager.lightdm.enable = true;
+  # services.xserver.desktopManager.cinnamon.enable = true;
+
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  
+  services.xserver.desktopManager.gnome.enable = true;  
   services.gnome.gnome-initial-setup.enable = false;
-  
+
   # Configure Hardware OpenGL and Vulkan to use NVIDIA
   hardware.graphics = {
     enable = true;
