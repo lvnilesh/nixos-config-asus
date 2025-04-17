@@ -4,93 +4,36 @@
 
 { config, lib, pkgs, ... }:
 
-let home-manager = builtins.fetchTarball {
-  url = "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
-  sha256 = "024jcyjxsr0cj4ycz4r8i60bydrl13l6vc16innv6wq32rcgyacb";
-};
-in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-
       ./apps.nix
 
       # (import "${home-manager}/nixos" )
-      # ./unused-vscode.nix
     ];
 
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
-  home-manager.backupFileExtension = "backup";
-#  home-manager.users.cloudgenius = import ./home.nix;
-  
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "asus"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
-  # Set your time zone.
   time.timeZone = "America/LosAngeles";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
 
-
-  # Enable Nix Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Optional: Auto-run garbage collection to save disk space
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 7d";
-  };
+#  nix.gc = {
+#    automatic = true;
+#    options = "--delete-older-than 7d";
+#  };
 
-  # Ensure Flakes can access the registry correctly
   nix.settings.substituters = ["https://cache.nixos.org/"];
   nix.settings.trusted-public-keys = ["cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="];
 
-  # Optional: Enable nix-direnv integration if you use direnv
-  # programs.direnv.enable = true;
-  # programs.direnv.nix-direnv.enable = true;
 
-
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    videoDrivers = ["nvidia"];
-    windowManager.qtile.enable = true;
-    extraConfig = ''
-      Section "Monitor"
-        Identifier "Virtual-1"
-        Option "PreferredMode" "3840x2160"
-      EndSection
-    '';
-		displayManager.sessionCommands = ''
-			xwallpaper --zoom /home/cloudgenius/nixos-config/wall/eog-wallpaper.png
-			xset r rate 200 35 &
-		'';
-  };
-
-# services.picom = {
-#		enable = true;
-#		backend = "glx";
-#		fade = true;
-#	};
 
 	fonts.packages = with pkgs; [
 		jetbrains-mono
@@ -99,14 +42,26 @@ in
   # services.xserver.displayManager.autoLogin.enable = true;
   # services.xserver.displayManager.autoLogin.user = "cloudgenius";
 
-  # services.xserver.displayManager.lightdm.enable = true;
-  # services.xserver.desktopManager.cinnamon.enable = true;
+  services.xserver = {
+    enable = true;
+    videoDrivers = ["nvidia"];
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+    xkb.layout = "us";
+    # xkb.options = "eurosign:e,caps:escape";
+  };
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;  
-  services.gnome.gnome-initial-setup.enable = false;
+  services = {
+    openssh.enable = true;
+    flatpak.enable = true;
+    printing.enable = true;
+    # libinput.enable = true;   # Enable touchpad support
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+    };
+  };
 
-  # Configure Hardware OpenGL and Vulkan to use NVIDIA
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -114,67 +69,29 @@ in
     # when services.xserver.videoDrivers includes "nvidia".
   };
 
-
   # Configure NVIDIA specific settings
   hardware.nvidia = {
-    # Modesetting is needed for modern displays and Wayland / smoother Xorg.
-    modesetting.enable = true;
-
-    # Use the NVIDIA proprietary driver (the default is usually suitable).
-    # 'production' selects the latest stable official driver.
-    package = config.boot.kernelPackages.nvidiaPackages.production;
-
-    # Optional: Enable power management (suspend/resume features)
-    powerManagement.enable = true;
-
-    # Optional: Open source kernel module (alternative, usually lower performance/features)
-    # Use EITHER 'package' OR 'open', not both. 'package' is recommended for 1080 Ti.
-    # open = true;
-
-    # Optional: Enable NVIDIA settings persistence daemon
-    nvidiaSettings = true;
+    modesetting.enable = true;          # Modesetting is needed for modern displays and Wayland / smoother Xorg.
+    package = config.boot.kernelPackages.nvidiaPackages.production;     # Use the NVIDIA proprietary driver
+    # package = config.boot.kernelPackages.nvidiaPackages.beta;
+    open = false;                       # Optional: Open source kernel module (alternative, usually lower performance/features)
+    nvidiaSettings = true;              # Optional: Enable NVIDIA settings persistence daemon
+    powerManagement.enable = true;      # Optional: Enable power management (suspend/resume features)
+    nvidiaPersistenced = true;
   };
 
-
-  # --- Docker Configuration ---
+  # Docker Configuration
   virtualisation.docker = {
-    enable = true;
-    
-    # Enable support for the NVIDIA Container Runtime -> GPU access
-    enableNvidia = true; # KEEP THIS FOR NOW. https://github.com/NixOS/nixpkgs/issues/363505
-
-    # Optional: Specify Docker package if needed, otherwise uses default
-    # package = pkgs.docker;
+    enable = true;    
+    enableNvidia = true;
+    # NVIDIA Container Runtime in docker- KEEP THIS FOR NOW. https://github.com/NixOS/nixpkgs/issues/363505
   };
 
-  # --- NVIDIA Container Toolkit Configuration (Updated based on warnings) ---
-  # This is the NEW way to enable GPU support in containers
   hardware.nvidia-container-toolkit.enable = true;
   
   # Despite that, GPU support in containers wont work without # virtualisation.docker.enableNvidia = true;
   # docker run --rm --runtime=nvidia --device nvidia.com/gpu=all ubuntu nvidia-smi
   # docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
-
- # Enable Flatpak service
-  services.flatpak.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound.
-  # hardware.pulseaudio.enable = true;
-  # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
 
   # for global user
   users.defaultUserShell=pkgs.zsh; 
@@ -190,6 +107,9 @@ in
       "networkmanager"
       "docker"
       "libvirtd"
+      "video"
+      "audio"
+      "input"
     ];
     
     shell = pkgs.zsh;
@@ -224,54 +144,104 @@ in
           ];
         };
     };
-  };
 
-  programs.firefox.enable = true;
+    firefox.enable = true;
+    mtr.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };    
+  
+    virt-manager.enable = true;
+
+  };
 
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     curl
     git
     wget
-
   ];
 
   # Virt manager
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
 
+  virtualisation = {
+    libvirtd.enable = true;
+    spiceUSBRedirection.enable = true;
+  };
 
-  networking.interfaces.eno1.useDHCP = true;
-  networking.interfaces.br0.useDHCP = true;
-  networking.bridges = {
-    "br0" = {
-      interfaces = [ "eno1" ];
+  networking = {
+    interfaces = {
+      eno1.useDHCP = true;
+      br0.useDHCP = true;
+    };
+    bridges = {
+      "br0" = {
+        interfaces = [ "eno1" ];
+      };
     };
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+
+
+
+
+
+
+hardware.interception-tools = {
+    enable = true;
+    udevmonConfig = ''
+      - JOB: intercept -g $DEVNODE | /run/interception/mouse-to-super | uinput -d /dev/uinput
+        DEVICE:
+          PROPERTIES: '*ID_VENDOR_ID*=="046d", *ID_MODEL_ID*=="c548"'
+    '';
+    plugins = [
+      (pkgs.writeShellScriptBin "mouse-to-super" ''
+        #!${pkgs.runtimeShell}
+        ${pkgs.gawk}/bin/awk '
+          BEGIN {
+            # !!! VERIFY THIS code using evtest for your specific mouse !!!
+            TARGET_BUTTON_CODE = 277; # <--- ADJUST THIS CODE!
+
+            KEY_LEFTMETA = 125;   # Super key
+            fflush()
+          }
+          $1 == 1 && $2 == TARGET_BUTTON_CODE && $3 == 1 {
+            print "1 " KEY_LEFTMETA " 1"; # Super Press
+            print "0 0 0"; # Sync
+            fflush();
+            next;
+          }
+          $1 == 1 && $2 == TARGET_BUTTON_CODE && $3 == 0 {
+            print "1 " KEY_LEFTMETA " 0"; # Super Release
+            print "0 0 0"; # Sync
+            fflush();
+            next;
+          }
+          { print $0; fflush(); }
+        '
+      '')
+    ];
+  };
+
+  # Optional: Ensure your user is in the 'input' group if you ever need
+  # to run tools like evtest directly without sudo (might not be needed for this setup).
+  # users.users.cloudgenius.extraGroups = [ "input" ];
+
+
+
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -295,7 +265,7 @@ in
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Changed from "24.11" # Did you read the comment?
 
 }
 

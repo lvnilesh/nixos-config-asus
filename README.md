@@ -42,6 +42,10 @@ Test
 docker run --rm --runtime=nvidia --device nvidia.com/gpu=all ubuntu nvidia-smi
 docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 ```
+verify nix store
+```
+sudo nix-store --verify --check-contents
+```
 
 generate hardware config
 
