@@ -29,6 +29,8 @@
 
       albert
       pciutils
+      usbutils
+      dig
     ];
   };
 }
