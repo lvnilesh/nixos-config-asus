@@ -63,6 +63,7 @@
       "explorer.confirmDelete" = false;
       "explorer.confirmDragAndDrop" = false;
       "files.autoSave" = "onFocusChange";
+      "git.autofetch" = true;
       "git.confirmSync" = false;
       "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
       "workbench.colorTheme" = "Default Dark+";

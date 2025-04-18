@@ -14,7 +14,6 @@ alias rb="sudo nixos-rebuild switch"
 alias arb="sudo nixos-rebuild switch --flake .#asus"
 alias g="git"
 ```
-gitaliases
 
 cleanup 
 ```
@@ -49,5 +48,13 @@ generate hardware config
 sudo nixos-generate-config --show-hardware-config > ~/nixos-config/hardware-configuration.nix
 ```
 
+update
+```
 nix flake update
 sudo nixos-rebuild switch --flake .#asus
+```
+
+TODO
+```
+gitaliases
+```
