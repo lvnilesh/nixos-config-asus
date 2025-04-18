@@ -48,6 +48,12 @@
       neofetch
       jetbrains-mono
       albert
+      (google-cloud-sdk.withExtraComponents [
+        google-cloud-sdk.components.gke-gcloud-auth-plugin
+        google-cloud-sdk.components.kubectl
+      ])
+      azure-cli
+      awscli2
     ]);
 
   systemd.user.services.albert = {
@@ -55,6 +61,18 @@
     Service = { ExecStart = "${pkgs.albert}/bin/albert"; Restart = "on-failure"; };
     Install = { WantedBy = [ "graphical-session.target" ]; };
   };
+
+  systemd.user.services.opentabletdriver = {
+    Unit = { Description = "opentabletdriver daemon launcher"; After = [ "graphical-session.target" ]; };
+    Service = { ExecStart = "${pkgs.opentabletdriver}/bin/otd-daemon"; Restart = "on-failure"; };
+    Install = { WantedBy = [ "graphical-session.target" ]; };
+  };
+
+  # https://github.com/NixOS/nixpkgs/issues/318274
+  # systemctl list-units --user --all
+  # cd ~/.config/systemd/user
+  # systemctl --user status opentabletdriver.service
+  # systemctl --user status graphical-session.target
 
   programs = {
     home-manager.enable = true;

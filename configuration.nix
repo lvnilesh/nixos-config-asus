@@ -91,6 +91,13 @@
   # docker run --rm --runtime=nvidia --device nvidia.com/gpu=all ubuntu nvidia-smi
   # docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 
+
+  # Tablet
+  hardware.opentabletdriver = {
+    enable = true;
+    daemon.enable = true;
+  };
+
   services.pulseaudio.enable = false; 
 
   services = {

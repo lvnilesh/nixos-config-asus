@@ -34,6 +34,7 @@
       usbutils
       dig
       ethtool
+      opentabletdriver
     ];
   };
 }
