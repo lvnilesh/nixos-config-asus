@@ -4,59 +4,9 @@
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "cloudgenius";
-#  home.homeDirectory = "/home/cloudgenius";
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
   home.stateVersion = "24.11"; # Set to your current NixOS/HM version
-
-  # --- Ensure Fontconfig is enabled for user fonts (Often enabled by default, but good practice) ---
   fonts.fontconfig.enable = true;
 
-  
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      ll = "ls -l";
-      ".." = "cd ..";
-      rb = "sudo nixos-rebuild switch";      
-      btw = "echo i use nixos btw";
-    };
-
-    initExtra = ''
-      export PS1='\[\e[38;5;76m\]\u\[\e[0m\] in \[\e[38;5;32m\]\w\[\e[0m\] \\$ '
-    '';
-  };
-
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      window.opacity = 1.0;
-      font.normal = {
-        family = "JetBrains Mono";
-        style = "Regular";
-      };
-      font.size = 16;
-    };
-  };
-
-  home.file.".config/bat/config".text = ''
-    --theme="Nord"
-    --style="numbers,changes,grid"
-    --paging=auto
-  '';
-  
-  home.file.".config/qtile".source = ./qtile;
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-
-  # Packages you want to install for your user
   home.packages = with pkgs; [
     firefox
     htop
@@ -67,15 +17,24 @@
     jetbrains-mono
   ];
 
+  programs = {
+    home-manager.enable = true;
+    alacritty = {
+      enable = true;
+      settings = {
+        window.opacity = 1.0;
+        font.normal = {
+          family = "JetBrains Mono";
+          style = "Regular";
+        };
+        font.size = 16;
+      };
+    };
+  };
+
   programs.vscode = {
     enable = true;
-
-    # --- CHOOSE ONE PACKAGE ---
-    # Option A: Install official Microsoft VS Code (requires allowUnfree)
-    package = pkgs.vscode;
-
-    # Option B: Install VSCodium (Open Source build, no telemetry/MS branding)
-    # package = pkgs.vscodium; # Recommended if you prefer FOSS
+    package = pkgs.vscode; # package = pkgs.vscodium;
 
     # --- Optional: Manage Extensions ---
     # Uncomment and add extensions you want managed by Home Manager
@@ -97,13 +56,12 @@
     # ];
 
     # --- Optional: Manage User Settings (settings.json) ---
-    # Uncomment and add settings you want managed by Home Manager
-
-    userSettings = {
+    profiles.default.userSettings = {
       "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'monospace', monospace";
       "editor.fontLigatures" = true; # --- Optional: Enable Font Ligatures (JetBrains Mono supports them) ---
       "editor.fontSize" = 16;    
-
+      "explorer.confirmDelete" = false;
+      "explorer.confirmDragAndDrop" = false;
       "files.autoSave" = "onFocusChange";
       "git.confirmSync" = false;
       "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
@@ -111,21 +69,13 @@
       "workbench.startupEditor" = "none";
     };
 
-    # --- Optional: Manage Keybindings (keybindings.json) ---
-    # userKeybindings = [
-    #   {
-    #     key = "ctrl+alt+t";
-    #     command = "workbench.action.terminal.toggleTerminal";
-    #   }
-    # ];
-
   };
 
 
   # Manage dotfiles
   home.file = {
     # Example: Create a directory
-    ".config/my-app".source = ./dotfiles/my-app; # Assuming you have ./dotfiles/my-app
+    ".config/mera-app".source = ./dotfiles/mera-app; # Assuming you have ./dotfiles/mera-app
 
     # Example: Symlink a file
     ".gitconfig".source = ./dotfiles/.gitconfig;
@@ -135,18 +85,16 @@
       Hello from Home Manager!
       Managed declaratively.
     '';
+    ".config/bat/config".text = ''
+      --theme="Nord"
+      --style="numbers,changes,grid"
+      --paging=auto
+    '';
   };
-  # Create a 'dotfiles' directory in ~/nixos-config/ to store these files
-
-  # Example: Configure environment variables
+  
   home.sessionVariables = {
     EDITOR = "vi";
-    # MY_API_KEY = "secret"; # DON'T DO THIS! Use secrets management.
   };
-
-  # You can configure many programs declaratively:
-  # programs.neovim.enable = true;
-  # programs.firefox.enable = true;
 
   # Enable user services (e.g., syncthing)
   # services.syncthing.enable = true;

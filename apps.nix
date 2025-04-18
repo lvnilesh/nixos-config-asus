@@ -9,13 +9,13 @@
       # libreoffice-fresh 
       # pdfarranger
       # gImageReader
-      dconf-editor 
-
-      gnome-tweaks
+      # gnome.dconf-editor 
+      # gnome.gnome-tweaks
+      # gnome.gnome-software
       btop
       htop
       flatpak
-      gnome-software
+      
       glxinfo      # Useful for checking OpenGL rendering (part of mesa-utils)
       cudatoolkit
       
