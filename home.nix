@@ -7,15 +7,41 @@
   home.stateVersion = "24.11"; # Set to your current NixOS/HM version
   fonts.fontconfig.enable = true;
 
-  home.packages = with pkgs; [
-    firefox
-    htop
-    vlc
-    unzip
-    bat
-    neofetch
-    jetbrains-mono
-  ];
+  dconf.settings = {
+    "org/gnome/shell" = {
+      enabled-extensions = [
+        "caffeine@patapon.info"
+        "tactile@lundal.io"
+#        "datemenu-formatter@marcinjakubowski.github.com"
+#        "openweather-extension@jenslody.de"
+#        "just-perfection-desktop@just-perfection"
+#        "blur-my-shell@aunetx"
+#        "space-bar@luchrioh"
+#        "undecorate@sun.wxg@gmail.com"
+#        "tophat@fflewddur.github.io"
+#        "AlphabeticalAppGrid@stuarthayhurst"        
+      ];
+    };
+    "org/gnome/shell/extensions/caffeine" = {
+      show-indicator = true;
+    };
+  };
+
+  home.packages = 
+    (with pkgs.gnomeExtensions; [
+      caffeine
+      tactile
+    ])
+    ++
+    (with pkgs; [
+      firefox
+      htop
+      vlc
+      unzip
+      bat
+      neofetch
+      jetbrains-mono
+    ]);
 
   programs = {
     home-manager.enable = true;
