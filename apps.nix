@@ -6,15 +6,17 @@
       deja-dup 
       bitwarden
       obsidian 
+      gnome-terminal 
+      btop
+      htop
+      flatpak
+
       # libreoffice-fresh 
       # pdfarranger
       # gImageReader
       # gnome.dconf-editor 
       # gnome.gnome-tweaks
       # gnome.gnome-software
-      btop
-      htop
-      flatpak
       
       glxinfo      # Useful for checking OpenGL rendering (part of mesa-utils)
       cudatoolkit
@@ -31,6 +33,7 @@
       pciutils
       usbutils
       dig
+
     ];
   };
 }
