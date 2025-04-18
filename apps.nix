@@ -29,11 +29,11 @@
       # pfetch
       opentofu
 
-      albert
+      
       pciutils
       usbutils
       dig
-
+      ethtool
     ];
   };
 }

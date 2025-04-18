@@ -6,6 +6,7 @@
   home.username = "cloudgenius";
   home.stateVersion = "24.11"; # Set to your current NixOS/HM version
   fonts.fontconfig.enable = true;
+  xdg.enable = true;
 
   dconf.settings = {
     "org/gnome/shell" = {
@@ -46,7 +47,14 @@
       bat
       neofetch
       jetbrains-mono
+      albert
     ]);
+
+  systemd.user.services.albert = {
+    Unit = { Description = "Albert Launcher"; After = [ "graphical-session.target" ]; };
+    Service = { ExecStart = "${pkgs.albert}/bin/albert"; Restart = "on-failure"; };
+    Install = { WantedBy = [ "graphical-session.target" ]; };
+  };
 
   programs = {
     home-manager.enable = true;
