@@ -40,7 +40,7 @@
     displayManager = {
       gdm.enable = true;
       sessionCommands = ''
-			  xwallpaper --zoom /home/cloudgenius/nixos-config/wall/eog-wallpaper.png
+			  # xwallpaper --zoom /home/cloudgenius/nixos-config/wall/eog-wallpaper.png
 			  xset r rate 200 35 &
 		  '';
       # autoLogin.enable = true;

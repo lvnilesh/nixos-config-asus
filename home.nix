@@ -25,6 +25,11 @@
     "org/gnome/shell/extensions/caffeine" = {
       show-indicator = true;
     };
+    "org/gnome/desktop/background" = {
+      picture-uri = "file:///home/cloudgenius/nixos-config/wall/eog-wallpaper.png";
+      picture-uri-dark = "file:///home/cloudgenius/nixos-config/wall/eog-wallpaper.png";
+      picture-options = "zoom"; # Or 'scaled', 'centered', 'spanned', etc.
+    };    
   };
 
   home.packages = 
