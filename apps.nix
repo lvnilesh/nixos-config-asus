@@ -35,6 +35,11 @@
       dig
       ethtool
       opentabletdriver
+      google-chrome
+      floorp
+      brave
+      python313Full
+      eza
     ];
   };
 }
