@@ -5,12 +5,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./apps.nix
-      # (import "${home-manager}/nixos" )
-    ];
+  imports = [ 
+    ./base.nix
+   ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -19,9 +16,6 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-  time.timeZone = "America/LosAngeles";
-
-  i18n.defaultLocale = "en_US.UTF-8";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -33,65 +27,6 @@
   nix.settings.substituters = ["https://cache.nixos.org/"];
   nix.settings.trusted-public-keys = ["cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="];
 
-  services.xserver = {
-    enable = true;
-    videoDrivers = ["nvidia"];
-    xkb.layout = "us";
-    displayManager = {
-      gdm.enable = true;
-      sessionCommands = ''
-			  # xwallpaper --zoom /home/cloudgenius/nixos-config/wall/eog-wallpaper.png
-			  xset r rate 200 35 &
-		  '';
-      # autoLogin.enable = true;
-      # autoLogin.user = "cloudgenius";
-    };
-    desktopManager.gnome = {
-      enable = true;  
-    };
-  };
-
-  services.gnome.gnome-initial-setup.enable = false;
-
-	fonts.packages = with pkgs; [
-		jetbrains-mono
-	];
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true; # Replaces driSupport32Bit concept
-    extraPackages = [ ];
-    extraPackages32 = [ ];
-  };
-
-#  hardware.opengl = {
-#    enable = true;
-#    driSupport = true; 
-#    driSupport32Bit = true;
-#  };
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    # package = config.boot.kernelPackages.nvidiaPackages.production;
-    package = config.boot.kernelPackages.nvidiaPackages.stable; 
-    open = false;
-    powerManagement.enable = true;     # Optional: Enable power management (suspend/resume features)
-    nvidiaSettings = true;     # Optional: Enable NVIDIA settings persistence daemon
-  };
-
-  virtualisation.docker = {
-    enable = true;
-    enableNvidia = true; 
-    # Enable support for the NVIDIA Container Runtime -> GPU access
-    # KEEP THIS FOR NOW. https://github.com/NixOS/nixpkgs/issues/363505
-  };
-
-  hardware.nvidia-container-toolkit.enable = true;
-  # Despite that, GPU support in containers wont work without # virtualisation.docker.enableNvidia = true;
-  # docker run --rm --runtime=nvidia --device nvidia.com/gpu=all ubuntu nvidia-smi
-  # docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
-
-
   # Tablet
   hardware.opentabletdriver = {
     enable = true;
@@ -99,62 +34,18 @@
   };
 
   services.pulseaudio.enable = false; 
-
+  security.rtkit.enable = true;
   services = {
     openssh.enable = true;
     flatpak.enable = true;
     printing.enable = true;    
     pipewire = {
       enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;      
       pulse.enable = true;
     };
-    tailscale = {
-      enable = true;  
-      # authKeyFile = "/etc/nixos/secrets/tailscale-authkey";
-      extraUpFlags = [
-        "--accept-routes"                # Accept routes advertised by other nodes
-        "--advertise-exit-node"
-        "--advertise-routes=192.168.1.0/24,192.168.20.0/24,192.168.30.0/24,192.168.40.0/24,10.0.0.0/16" # Advertise local subnets
-        "--accept-dns=false"             # Don't use Tailscale DNS settings
-        "--ssh"                          # Enable Tailscale SSH server on this node
-        "--hostname=asus-nix"            # Set a specific Tailscale hostname
-      ];
-    };
   };
-
-  # --- Tailscale exit node ---
-
-  # Enable IP Forwarding
-  boot.kernel.sysctl = {
-    "net.ipv4.ip_forward" = 1;
-    "net.ipv6.conf.all.forwarding" = 1;
-  };
-
-  # Configure Firewall (If enabled)
-  # If you have networking.firewall.enable = true;, you need to allow
-  # traffic from the Tailscale interface and potentially forwarding.
-  # Trusting the interface is often the simplest way.
-  # networking.firewall.trustedInterfaces = [ "tailscale0" ];  
-
-  # sudo tailscale up --advertise-routes=192.168.1.0/24,192.168.20.0/24,192.168.30.0/24,192.168.40.0/24,10.0.0.0/24 --advertise-exit-node
-  # Warning: UDP GRO forwarding is suboptimally configured on br0, UDP forwarding throughput capability will increase with a configuration change.
-  # See https://tailscale.com/s/ethtool-config-udp-gro
-  # Some peers are advertising routes but --accept-routes is false
-
-  systemd.services.ethtool-br0 = {
-    description = "Set ethtool options for br0";
-    after = [ "network.target" ];
-    wants = [ "network.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = ''
-        ${pkgs.ethtool}/bin/ethtool -K br0 rx-udp-gro-forwarding on rx-gro-list off
-      '';
-    };
-    wantedBy = [ "multi-user.target" ];
-  };
-
-  # sudo ethtool -k br0 | grep -E 'rx-udp-gro-forwarding|rx-gro-list'
 
   # services.libinput.enable = true;   # Enable touchpad support (enabled default in most desktopManager).
 
@@ -188,7 +79,7 @@
   # enable zsh and oh my zsh
   programs = {
     virt-manager.enable = true;
-    firefox.enable = true;
+#    firefox.enable = true;
     zsh = {
         enable = true;
         autosuggestions.enable = true;
@@ -224,28 +115,18 @@
     wget
   ];
 
-  virtualisation = {
-    libvirtd.enable = true;
-    spiceUSBRedirection.enable = true;
-  };
-  
-  networking.interfaces.eno1.useDHCP = true;
-  networking.interfaces.br0.useDHCP = true;
-  networking.bridges = {
-    "br0" = {
-      interfaces = [ "eno1" ];
-    };
-  };
-
-
-  programs = {
-    mtr.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-  };
-
+  # Examine the previous boot's journal: After rebooting (even if it was slow), check the logs from the end of the previous shutdown sequence.
+  # journalctl -b -1 -e
+  # Systemd has tools to analyze boot and shutdown times, although shutdown analysis is trickier.
+  # systemd-analyze blame: While primarily for boot, sometimes long-running startup services can cause shutdown issues. Run it to see if any services take an exceptionally long time to start.
+  # systemd-analyze blame    
+    
+  # Ensure hardware module is loaded if needed, e.g.:
+  boot.kernelModules = [
+    "iTCO_wdt" # Example for Intel TCO watchdog
+    # "sp5100_tco" # Example for AMD SP5100 TCO
+    # Add the module specific to your hardware
+  ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
