@@ -15,6 +15,7 @@
       ./modules/cpu-power.nix
       ./modules/ssh.nix
       ./modules/virt.nix
+      ./modules/vscode-remote.nix
 
       # (import "${home-manager}/nixos" )
     ];

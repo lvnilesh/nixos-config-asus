@@ -36,7 +36,13 @@
   services.pulseaudio.enable = false; 
   security.rtkit.enable = true;
   services = {
-    openssh.enable = true;
+    openssh= {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false; # set false and use keys instead!
+        PermitRootLogin = "no"; # say no to this.
+      };
+    };
     flatpak.enable = true;
     printing.enable = true;    
     pipewire = {
@@ -57,6 +63,9 @@
     initialPassword = "cdcd";
     description = "Nilesh";
     isNormalUser = true;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEWM/PQ1EF0spec86grdfOaT0/G92oV2KxPHPSe4fTp7"
+    ];
     extraGroups = [ 
 
       "wheel" # Enable ‘sudo’ for the user. 

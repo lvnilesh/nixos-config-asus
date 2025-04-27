@@ -17,13 +17,21 @@
 			  # xwallpaper --zoom /home/cloudgenius/nixos-config/wall/eog-wallpaper.png
 			  xset r rate 200 35 &
 		  '';
-      # autoLogin.enable = true;
-      # autoLogin.user = "cloudgenius";
     };
     desktopManager.gnome = {
       enable = true;  
     };
   };
+
+  # Enable automatic login for the user.
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "cloudgenius";
+  };
+
+  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
 
   services.gnome.gnome-initial-setup.enable = false;
 
