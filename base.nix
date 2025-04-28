@@ -1,24 +1,22 @@
-{ pkgs, ... }:
+{pkgs, ...}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./modules/apps.nix
+    ./modules/opensnitch.nix
+    ./modules/firefox.nix
+    ./modules/slack.nix
+    ./modules/gnome.nix
+    ./modules/nvidia.nix
+    ./modules/docker.nix
+    ./modules/tailscale.nix
+    ./modules/cpu-power.nix
+    ./modules/ssh.nix
+    ./modules/virt.nix
+    ./modules/vscode-remote.nix
 
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./modules/apps.nix
-      ./modules/opensnitch.nix
-      ./modules/firefox.nix
-      ./modules/slack.nix
-      ./modules/gnome.nix
-      ./modules/nvidia.nix
-      ./modules/docker.nix
-      ./modules/tailscale.nix
-      ./modules/cpu-power.nix
-      ./modules/ssh.nix
-      ./modules/virt.nix
-      ./modules/vscode-remote.nix
-
-      # (import "${home-manager}/nixos" )
-    ];
+    # (import "${home-manager}/nixos" )
+  ];
 
   time.timeZone = "America/LosAngeles";
 
@@ -36,7 +34,7 @@
   };
 
   fonts.packages = with pkgs; [
-	  jetbrains-mono
+    jetbrains-mono
   ];
 
   # Leave bluetooth off on boot, the user can enable if needed
@@ -59,6 +57,5 @@
   };
 
   # Enable udev settings for yubikey personalization
-  services.udev.packages = [ pkgs.yubikey-personalization ];
-
+  services.udev.packages = [pkgs.yubikey-personalization];
 }

@@ -1,6 +1,8 @@
-{ pkgs, lib, ... }:
 {
-
+  pkgs,
+  lib,
+  ...
+}: {
   services.xserver = {
     enable = true;
     videoDrivers = ["nvidia"];
@@ -14,12 +16,12 @@
     displayManager = {
       gdm.enable = true;
       sessionCommands = ''
-			  # xwallpaper --zoom /home/cloudgenius/nixos-config/wall/eog-wallpaper.png
-			  xset r rate 200 35 &
-		  '';
+        # xwallpaper --zoom /home/cloudgenius/nixos-config/wall/eog-wallpaper.png
+        xset r rate 200 35 &
+      '';
     };
     desktopManager.gnome = {
-      enable = true;  
+      enable = true;
     };
   };
 
@@ -36,10 +38,9 @@
   services.gnome.gnome-initial-setup.enable = false;
 
   environment.systemPackages = with pkgs.gnomeExtensions; [
-
   ];
 
-  environment.gnome.excludePackages = (with pkgs; [
+  environment.gnome.excludePackages = with pkgs; [
     epiphany
     geary
     gnome-calendar
@@ -54,7 +55,7 @@
     # gnome-terminal
     gnome-tour
     yelp
-  ]);
+  ];
 
   # The calculator app tries to pull various values for currency conversions, etc that I don't need.  Just block
   # everything
@@ -64,15 +65,12 @@
       enabled = true;
       action = "deny";
       duration = "always";
-      operator =
-        {
-          type = "simple";
-          sensitive = false;
-          operand = "process.path";
-          data = "${lib.getBin pkgs.gnome-calculator}/bin/.gnome-calculator-wrapped";
-        };
+      operator = {
+        type = "simple";
+        sensitive = false;
+        operand = "process.path";
+        data = "${lib.getBin pkgs.gnome-calculator}/bin/.gnome-calculator-wrapped";
+      };
     };
   };
 }
-
-

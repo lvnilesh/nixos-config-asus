@@ -1,26 +1,29 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   environment = {
     systemPackages = with pkgs; [
-      deja-dup 
+      deja-dup
       bitwarden
-      obsidian 
-      gnome-terminal 
+      obsidian
+      gnome-terminal
       btop
       htop
       flatpak
 
-      # libreoffice-fresh 
+      # libreoffice-fresh
       # pdfarranger
       # gImageReader
-      # gnome.dconf-editor 
+      # gnome.dconf-editor
       # gnome.gnome-tweaks
       # gnome.gnome-software
-      
-      glxinfo      # Useful for checking OpenGL rendering (part of mesa-utils)
+
+      glxinfo # Useful for checking OpenGL rendering (part of mesa-utils)
       cudatoolkit
-      
+
       # neovim
       alacritty
       xwallpaper
@@ -29,7 +32,6 @@
       # pfetch
       opentofu
 
-      
       pciutils
       usbutils
       dig
@@ -40,6 +42,11 @@
       brave
       python313Full
       eza
+      alejandra
+      dunst # notify-send
+      mako # notify-send
+      libnotify # notify-send
+      glib # notify-send
     ];
   };
 }

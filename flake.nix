@@ -9,15 +9,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-#   nix-colors.url = "github:misterio77/nix-colors";
+    #   nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: {
     nixosConfigurations = {
-
       asus = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux"; # Or "aarch64-linux", etc.
-        specialArgs = { inherit inputs; }; # Pass inputs down to modules
+        specialArgs = {inherit inputs;}; # Pass inputs down to modules
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager

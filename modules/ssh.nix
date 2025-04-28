@@ -1,6 +1,8 @@
-{ pkgs, lib, ... }:
 {
-
+  pkgs,
+  lib,
+  ...
+}: {
   programs = {
     mtr.enable = true;
     gnupg.agent = {
@@ -8,5 +10,4 @@
       enableSSHSupport = true;
     };
   };
-
 }

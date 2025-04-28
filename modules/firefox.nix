@@ -1,6 +1,9 @@
-{ pkgs, lib, ... }:
-let
-  managed-firefox = (pkgs.firefox.override {
+{
+  pkgs,
+  lib,
+  ...
+}: let
+  managed-firefox = pkgs.firefox.override {
     extraPolicies = {
       AutofillCreditCardEnabled = false;
       DisableFirefoxAccounts = true;
@@ -40,7 +43,7 @@ let
         };
         # darkreader
         "addon@darkreader.org" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4439735/darkreader-4.9.103.xpi";         
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4439735/darkreader-4.9.103.xpi";
           installation_mode = "force_installed";
         };
         # sponsorblock
@@ -60,13 +63,11 @@ let
         Locked = true;
       };
     };
-  });
-in
-{
+  };
+in {
   environment.systemPackages = [
     managed-firefox
   ];
-
 
   services.opensnitch.rules = {
     rule-000-firefox = {

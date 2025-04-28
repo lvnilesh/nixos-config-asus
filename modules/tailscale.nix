@@ -1,18 +1,21 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   services.tailscale = {
-    enable = true;  
+    enable = true;
     # authKeyFile = "/etc/nixos/secrets/tailscale-authkey";
     extraUpFlags = [
-      "--accept-routes"                # Accept routes advertised by other nodes
+      "--accept-routes" # Accept routes advertised by other nodes
       "--advertise-exit-node"
       "--advertise-routes=192.168.1.0/24,192.168.20.0/24,192.168.30.0/24,192.168.40.0/24,10.0.0.0/16" # Advertise local subnets
-      "--accept-dns=false"             # Don't use Tailscale DNS settings
-      "--ssh"                          # Enable Tailscale SSH server on this node
-      "--hostname=asus-nix"            # Set a specific Tailscale hostname
+      "--accept-dns=false" # Don't use Tailscale DNS settings
+      "--ssh" # Enable Tailscale SSH server on this node
+      "--hostname=asus-nix" # Set a specific Tailscale hostname
     ];
   };
-  
+
   # --- Tailscale exit node ---
 
   # Enable IP Forwarding
@@ -25,7 +28,7 @@
   # If you have networking.firewall.enable = true;, you need to allow
   # traffic from the Tailscale interface and potentially forwarding.
   # Trusting the interface is often the simplest way.
-  # networking.firewall.trustedInterfaces = [ "tailscale0" ];  
+  # networking.firewall.trustedInterfaces = [ "tailscale0" ];
 
   # sudo tailscale up --advertise-routes=192.168.1.0/24,192.168.20.0/24,192.168.30.0/24,192.168.40.0/24,10.0.0.0/24 --advertise-exit-node
   # Warning: UDP GRO forwarding is suboptimally configured on br0, UDP forwarding throughput capability will increase with a configuration change.
@@ -34,17 +37,16 @@
 
   systemd.services.ethtool-br0 = {
     description = "Set ethtool options for br0";
-    after = [ "network.target" ];
-    wants = [ "network.target" ];
+    after = ["network.target"];
+    wants = ["network.target"];
     serviceConfig = {
       Type = "oneshot";
       ExecStart = ''
         ${pkgs.ethtool}/bin/ethtool -K br0 rx-udp-gro-forwarding on rx-gro-list off
       '';
     };
-    wantedBy = [ "multi-user.target" ];
+    wantedBy = ["multi-user.target"];
   };
 
   # sudo ethtool -k br0 | grep -E 'rx-udp-gro-forwarding|rx-gro-list'
-
 }

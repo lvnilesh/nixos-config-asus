@@ -1,13 +1,14 @@
 # In your home-manager configuration (e.g., home.nix)
-{ config, pkgs, lib, ... }:
-
 {
-
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   # --- Configure Vitals Settings via dconf ---
   dconf.settings = {
     # Target the dconf path used by the Vitals extension
     "org/gnome/shell/extensions/vitals" = {
-
       # --- Example Vitals Configuration ---
       # (Adjust these values to your preferences)
 
@@ -26,9 +27,9 @@
       show-swap-usage = true;
       show-network-speed = true;
       show-storage-usage = true; # Shows usage for specified partitions
-      show-temperature = true;  # Requires working sensors (lm_sensors often needed)
-      show-voltage = true;      # Requires working sensors
-      show-fan = true;          # Requires working sensors
+      show-temperature = true; # Requires working sensors (lm_sensors often needed)
+      show-voltage = true; # Requires working sensors
+      show-fan = true; # Requires working sensors
       show-battery = true;
       show-system-load = true;
       show-process-count = true;
@@ -39,12 +40,12 @@
 
       # Storage partitions to monitor (list of mount points or device paths)
       # Example: show root and home
-      storage-paths = [ "/" "/home" ];
+      storage-paths = ["/" "/home"];
       # Example: show specific devices
       # storage-paths = [ "/dev/nvme0n1p2" "/dev/sda1" ];
 
       # Network configuration
-      network-interfaces = [ ]; # Empty array usually means 'monitor all active'
+      network-interfaces = []; # Empty array usually means 'monitor all active'
       # Or specify like: network-interfaces = [ "enp3s0" "wlp4s0" ];
       network-speed-unit = "B"; # 'B' (Bytes), 'b' (bits)
       show-total-network-speed = false; # Sum speed across interfaces
@@ -68,7 +69,6 @@
     # --- You can add settings for other extensions or GNOME components here ---
     # "org/gnome/shell/extensions/dash-to-dock" = { ... };
     # "org/gnome/desktop/interface" = { ... };
-
   }; # End dconf.settings
 
   # --- Optional: System-level dependencies (might be needed for sensors) ---
@@ -78,6 +78,4 @@
   #
   # hardware.sensor.lmSensors.enable = true;
   # services.udev.enable = true; # Usually enabled by default with GNOME
-
-
 }

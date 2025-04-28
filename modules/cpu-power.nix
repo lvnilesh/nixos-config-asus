@@ -1,6 +1,8 @@
-{ pkgs, lib, ... }:
 {
-  
+  pkgs,
+  lib,
+  ...
+}: {
   # Set up auto-cpufreq for better power management.
   services.auto-cpufreq.enable = true;
   services.auto-cpufreq.settings = {
@@ -15,5 +17,4 @@
   };
   # This is the service that lets you pick power profiles in the gnome UI.  It conflicts with auto-cpufreq
   services.power-profiles-daemon.enable = false;
-
 }

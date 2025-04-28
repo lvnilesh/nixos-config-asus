@@ -1,6 +1,9 @@
-{ config, pkgs, inputs, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./vitals.nix
   ];
@@ -19,7 +22,7 @@
         "tactile@lundal.io"
         "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
         "pop-shell@system76.com"
-        "forge@jmmaranan.com"          
+        "forge@jmmaranan.com"
         "Vitals@CoreCoding.com"
         "gsconnect@andyholmes.github.io"
         "quick-settings-tweaks@qwreey"
@@ -33,7 +36,7 @@
         "space-bar@luchrioh"
         "undecorate@sun.wxg@gmail.com"
         "tophat@fflewddur.github.io"
-        "AlphabeticalAppGrid@stuarthayhurst"        
+        "AlphabeticalAppGrid@stuarthayhurst"
       ];
     };
     "org/gnome/shell/extensions/caffeine" = {
@@ -99,29 +102,26 @@
       picture-options = "zoom"; # Or 'scaled', 'centered', 'spanned', etc.
     };
 
-
-
-
     # --- Window Manager Keybindings ---
     "org/gnome/desktop/wm/keybindings" = {
-      close = [ "<Super>w" ];
-      maximize = [ "<Super>Up" ];
-      begin-resize = [ "<Super>BackSpace" ];
-      toggle-fullscreen = [ "<Shift>F11" ];
-      switch-to-workspace-1 = [ "<Super>1" ];
-      switch-to-workspace-2 = [ "<Super>2" ];
-      switch-to-workspace-3 = [ "<Super>3" ];
-      switch-to-workspace-4 = [ "<Super>4" ];
-      switch-to-workspace-5 = [ "<Super>5" ];
-      switch-to-workspace-6 = [ "<Super>6" ];
+      close = ["<Super>w"];
+      maximize = ["<Super>Up"];
+      begin-resize = ["<Super>BackSpace"];
+      toggle-fullscreen = ["<Shift>F11"];
+      switch-to-workspace-1 = ["<Super>1"];
+      switch-to-workspace-2 = ["<Super>2"];
+      switch-to-workspace-3 = ["<Super>3"];
+      switch-to-workspace-4 = ["<Super>4"];
+      switch-to-workspace-5 = ["<Super>5"];
+      switch-to-workspace-6 = ["<Super>6"];
       # Disable default Super+Space for input source switching
-      switch-input-source = [ ];
-      switch-input-source-backward = [ ];
+      switch-input-source = [];
+      switch-input-source-backward = [];
     };
 
     # --- Media Keys & Custom Keybindings ---
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      next = [ "<Shift>AudioPlay" ];
+      next = ["<Shift>AudioPlay"];
 
       # List ALL custom keybinding paths you define below
       custom-keybindings = [
@@ -196,23 +196,19 @@
 
     # --- Shell Keybindings (App Switching) ---
     "org/gnome/shell/keybindings" = {
-      switch-to-application-1 = [ "<Alt>1" ];
-      switch-to-application-2 = [ "<Alt>2" ];
-      switch-to-application-3 = [ "<Alt>3" ];
-      switch-to-application-4 = [ "<Alt>4" ];
-      switch-to-application-5 = [ "<Alt>5" ];
-      switch-to-application-6 = [ "<Alt>6" ];
-      switch-to-application-7 = [ "<Alt>7" ];
-      switch-to-application-8 = [ "<Alt>8" ];
-      switch-to-application-9 = [ "<Alt>9" ];
+      switch-to-application-1 = ["<Alt>1"];
+      switch-to-application-2 = ["<Alt>2"];
+      switch-to-application-3 = ["<Alt>3"];
+      switch-to-application-4 = ["<Alt>4"];
+      switch-to-application-5 = ["<Alt>5"];
+      switch-to-application-6 = ["<Alt>6"];
+      switch-to-application-7 = ["<Alt>7"];
+      switch-to-application-8 = ["<Alt>8"];
+      switch-to-application-9 = ["<Alt>9"];
     };
-
   };
 
-
-  
-
-  home.packages = 
+  home.packages =
     (with pkgs.gnomeExtensions; [
       # ulauncher
       # flameshot
@@ -224,13 +220,12 @@
       dash-to-dock
       vitals
       # pop-shell
-      forge 
+      forge
       blur-my-shell
       gsconnect
-      quick-settings-tweaker      
+      quick-settings-tweaker
     ])
-    ++
-    (with pkgs; [
+    ++ (with pkgs; [
       htop
       vlc
       unzip
@@ -250,15 +245,27 @@
     ]);
 
   systemd.user.services.albert = {
-    Unit = { Description = "Albert Launcher"; After = [ "graphical-session.target" ]; };
-    Service = { ExecStart = "${pkgs.albert}/bin/albert"; Restart = "on-failure"; };
-    Install = { WantedBy = [ "graphical-session.target" ]; };
+    Unit = {
+      Description = "Albert Launcher";
+      After = ["graphical-session.target"];
+    };
+    Service = {
+      ExecStart = "${pkgs.albert}/bin/albert";
+      Restart = "on-failure";
+    };
+    Install = {WantedBy = ["graphical-session.target"];};
   };
 
   systemd.user.services.opentabletdriver = {
-    Unit = { Description = "opentabletdriver daemon launcher"; After = [ "graphical-session.target" ]; };
-    Service = { ExecStart = "${pkgs.opentabletdriver}/bin/otd-daemon"; Restart = "on-failure"; };
-    Install = { WantedBy = [ "graphical-session.target" ]; };
+    Unit = {
+      Description = "opentabletdriver daemon launcher";
+      After = ["graphical-session.target"];
+    };
+    Service = {
+      ExecStart = "${pkgs.opentabletdriver}/bin/otd-daemon";
+      Restart = "on-failure";
+    };
+    Install = {WantedBy = ["graphical-session.target"];};
   };
 
   # https://github.com/NixOS/nixpkgs/issues/318274
@@ -361,7 +368,7 @@
       profiles.default.userSettings = {
         "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'monospace', monospace";
         "editor.fontLigatures" = true; # --- Optional: Enable Font Ligatures (JetBrains Mono supports them) ---
-        "editor.fontSize" = 16;    
+        "editor.fontSize" = 16;
         "explorer.confirmDelete" = false;
         "explorer.confirmDragAndDrop" = false;
         "files.autoSave" = "onFocusChange";
@@ -374,21 +381,21 @@
     };
   };
 
-#   gtk = {
-#     enable = true;
-#     theme.name = "adw-gtk3";
-#     cursorTheme.name = "Bibata-Modern-Ice";
-#     iconTheme.name = "GrubboxPlus";
-#   };
-# 
-#   xdg.mimeApps.defaultApplications = {
-#     "text/plain" = ["neovide.desktop"];
-#     "application/pdf" = ["zathura.desktop"];
-#     "image/*" = ["sxiv.desktop"];
-#     "video/png" = ["mpv.desktop"];
-#     "video/jpg" = ["mpv.desktop"];
-#     "video/*" = ["mpv.desktop"];
-#   };
+  #   gtk = {
+  #     enable = true;
+  #     theme.name = "adw-gtk3";
+  #     cursorTheme.name = "Bibata-Modern-Ice";
+  #     iconTheme.name = "GrubboxPlus";
+  #   };
+  #
+  #   xdg.mimeApps.defaultApplications = {
+  #     "text/plain" = ["neovide.desktop"];
+  #     "application/pdf" = ["zathura.desktop"];
+  #     "image/*" = ["sxiv.desktop"];
+  #     "video/png" = ["mpv.desktop"];
+  #     "video/jpg" = ["mpv.desktop"];
+  #     "video/*" = ["mpv.desktop"];
+  #   };
 
   # Manage dotfiles
   home.file = {
@@ -409,7 +416,7 @@
       --paging=auto
     '';
   };
-  
+
   home.sessionVariables = {
     EDITOR = "vi";
   };

@@ -1,28 +1,29 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }:
-
 {
-  imports = [ 
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
     ./base.nix
-   ];
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "asus"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-#  nix.gc = {
-#    automatic = true;
-#    options = "--delete-older-than 7d";
-#  };
+  #  nix.gc = {
+  #    automatic = true;
+  #    options = "--delete-older-than 7d";
+  #  };
 
   nix.settings.substituters = ["https://cache.nixos.org/"];
   nix.settings.trusted-public-keys = ["cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="];
@@ -33,10 +34,10 @@
     daemon.enable = true;
   };
 
-  services.pulseaudio.enable = false; 
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services = {
-    openssh= {
+    openssh = {
       enable = true;
       settings = {
         PasswordAuthentication = false; # set false and use keys instead!
@@ -44,11 +45,11 @@
       };
     };
     flatpak.enable = true;
-    printing.enable = true;    
+    printing.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
-      alsa.support32Bit = true;      
+      alsa.support32Bit = true;
       pulse.enable = true;
     };
   };
@@ -56,7 +57,7 @@
   # services.libinput.enable = true;   # Enable touchpad support (enabled default in most desktopManager).
 
   # for global user
-  users.defaultUserShell=pkgs.zsh; 
+  users.defaultUserShell = pkgs.zsh;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.cloudgenius = {
@@ -66,17 +67,18 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEWM/PQ1EF0spec86grdfOaT0/G92oV2KxPHPSe4fTp7"
     ];
-    extraGroups = [ 
-
-      "wheel" # Enable ‘sudo’ for the user. 
+    extraGroups = [
+      "wheel" # Enable ‘sudo’ for the user.
       "networkmanager"
       "docker"
       "libvirtd"
       "audio"
       "video"
       "input"
+      "kvm"
+      "libvirt"
     ];
-    
+
     shell = pkgs.zsh;
 
     packages = with pkgs; [
@@ -88,28 +90,28 @@
   # enable zsh and oh my zsh
   programs = {
     virt-manager.enable = true;
-#    firefox.enable = true;
+    #    firefox.enable = true;
     zsh = {
+      enable = true;
+      autosuggestions.enable = true;
+      zsh-autoenv.enable = true;
+      syntaxHighlighting.enable = true;
+      ohMyZsh = {
         enable = true;
-        autosuggestions.enable = true;
-        zsh-autoenv.enable = true;
-        syntaxHighlighting.enable = true;
-        ohMyZsh = {
-          enable = true;
-          theme = "robbyrussell";
-          plugins = [
-            "git"
-            "npm"
-            "history"
-            "node"
-            "rust"
-            "deno"
-            "sudo"
-            "terraform"
-            "systemadmin"
-            "vi-mode"           
-          ];
-        };
+        theme = "robbyrussell";
+        plugins = [
+          "git"
+          "npm"
+          "history"
+          "node"
+          "rust"
+          "deno"
+          "sudo"
+          "terraform"
+          "systemadmin"
+          "vi-mode"
+        ];
+      };
     };
   };
 
@@ -128,8 +130,8 @@
   # journalctl -b -1 -e
   # Systemd has tools to analyze boot and shutdown times, although shutdown analysis is trickier.
   # systemd-analyze blame: While primarily for boot, sometimes long-running startup services can cause shutdown issues. Run it to see if any services take an exceptionally long time to start.
-  # systemd-analyze blame    
-    
+  # systemd-analyze blame
+
   # Ensure hardware module is loaded if needed, e.g.:
   boot.kernelModules = [
     "iTCO_wdt" # Example for Intel TCO watchdog
@@ -166,6 +168,4 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
-
