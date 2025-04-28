@@ -231,6 +231,7 @@
       unzip
       bat
       neofetch
+      fastfetch
       jetbrains-mono
       albert
       (google-cloud-sdk.withExtraComponents [

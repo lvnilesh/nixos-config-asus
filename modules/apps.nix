@@ -47,6 +47,7 @@
       mako # notify-send
       libnotify # notify-send
       glib # notify-send
+      discord
     ];
   };
 }
