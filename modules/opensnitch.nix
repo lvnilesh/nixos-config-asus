@@ -13,7 +13,7 @@
 
   # A list of general rules needed no matter how the system is configured
   services.opensnitch = {
-    enable = false;
+    enable = true;
     settings.DefaultAction = "deny";
     rules = {
       rule-000-localhost = {
