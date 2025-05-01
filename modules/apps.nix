@@ -53,7 +53,7 @@
       # Core Rust toolchain
       rustc
       cargo
-
+      gcc
       # Essential development tools
       rustfmt # Code formatter
       clippy # Linter
