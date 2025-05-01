@@ -429,9 +429,17 @@
       enableCompletion = true;
       envExtra = ''
         export ZOMEZSHVARIABLE="something";
-        alias ls="eza -al";
+
         alias k=kubectl;
       '';
+      # Add code to run near the end of zsh initialization
+      initExtra = ''
+        # Attempt to remove the ls alias, ignore errors if it doesn't exist
+        unalias ls 2>/dev/null || true
+        alias ls=eza
+        # Add any other custom init commands below
+      '';
+      # OR use initExtraFirst = '' ... ''; to run earlier
     };
     vscode = {
       enable = true;

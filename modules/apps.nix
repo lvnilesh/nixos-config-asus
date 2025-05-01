@@ -32,6 +32,7 @@
       # pfetch
       opentofu
 
+      coreutils
       pciutils
       usbutils
       dig
@@ -48,6 +49,15 @@
       libnotify # notify-send
       glib # notify-send
       discord
+
+      # Core Rust toolchain
+      rustc
+      cargo
+
+      # Essential development tools
+      rustfmt # Code formatter
+      clippy # Linter
+      rust-analyzer # Language server for IDEs
     ];
   };
 }
