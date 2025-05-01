@@ -29,4 +29,35 @@
     #   StpEnable = true;
     # };
   };
+
+  # CPU governor for consistent performance use systemd instead since cpufreq is unavailable
+  # services.cpufreq = {
+  #   enable = true;
+  #   governor = "performance";
+  # };
+
+  # Set governor at boot using systemd service
+  systemd.services.set-cpu-governor = {
+    description = "Set CPU governor to performance";
+    after = ["multi-user.target"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -g performance";
+    };
+  };
+
+  environment.systemPackages = with pkgs; [
+    pkgs.linuxPackages.cpupower # Ensure cpupower tool is available for governing performance
+    virt-manager
+    libguestfs
+    spice
+    spice-gtk
+    virtiofsd # enable virtiofs for shared folders
+    virt-viewer
+    lm_sensors
+  ];
+
+  # Firewall: open ports for VNC/SPICE access if needed
+  networking.firewall.allowedTCPPorts = [5900 5901 5902];
 }
