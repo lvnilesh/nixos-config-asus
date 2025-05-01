@@ -51,9 +51,12 @@
       discord
 
       # Core Rust toolchain
+      rustup
       rustc
       cargo
       gcc
+      (rustPlatform.rustLibSrc) # Add the source component
+
       # Essential development tools
       rustfmt # Code formatter
       clippy # Linter
