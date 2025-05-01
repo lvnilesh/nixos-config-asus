@@ -13,6 +13,9 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # boot.kernelParams = [
+  #   "video=DP-1:5120x2880@60"
+  # ];
 
   networking.hostName = "asus"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

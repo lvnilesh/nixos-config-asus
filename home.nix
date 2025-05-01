@@ -378,6 +378,8 @@
         "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
         "workbench.colorTheme" = "Default Dark+";
         "workbench.startupEditor" = "none";
+        "update.mode" = "manual";
+        "update.showReleaseNotes" = false;
       };
     };
   };
