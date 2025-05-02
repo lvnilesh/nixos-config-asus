@@ -30,6 +30,8 @@
     # };
   };
 
+  # Also see modules/cpu-power.nix
+
   # CPU governor for consistent performance use systemd instead since cpufreq is unavailable
   # services.cpufreq = {
   #   enable = true;
