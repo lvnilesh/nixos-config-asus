@@ -16,8 +16,7 @@
     displayManager = {
       gdm.enable = true;
       sessionCommands = ''
-        # xwallpaper --zoom /home/cloudgenius/nixos-config/wall/eog-wallpaper.png
-        xset r rate 200 35 &
+        ${pkgs.xorg.xset}/bin/xset r rate 200 35 &
       '';
     };
     desktopManager.gnome = {

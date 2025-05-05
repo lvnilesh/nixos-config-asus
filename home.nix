@@ -172,23 +172,23 @@
     # Define Custom Keybinding 4: Apple Brightness Down (ASDControl)
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
       name = "Brightness Down";
-      # Make sure your b.sh script is executable (chmod +x ~/b.sh)
+      # Make sure your ddc.sh script is executable (chmod +x ~/ddc.sh)
       # The path must be correct for the user 'cloudgenius'
-      command = "/home/cloudgenius/b.sh down";
+      command = "/home/cloudgenius/ddc.sh down";
       binding = "<Control>F1";
     };
 
     # Define Custom Keybinding 5: Apple Brightness Up (ASDControl)
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5" = {
       name = "Brightness Up";
-      command = "/home/cloudgenius/b.sh up";
+      command = "/home/cloudgenius/ddc.sh up";
       binding = "<Control>F2";
     };
 
     # Define Custom Keybinding 6: Apple Brightness Max (ASDControl)
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6" = {
       name = "Brightness Up";
-      command = "/home/cloudgenius/b.sh up";
+      command = "/home/cloudgenius/ddc.sh up";
       binding = "<Control><Shift>F2";
     };
 
@@ -505,7 +505,7 @@
     ".config/mera-app".source = ./dotfiles/mera-app; # Assuming you have ./dotfiles/mera-app
 
     # Example: Symlink screen brightness control script
-    "b.sh".source = ./dotfiles/b.sh;
+    "ddc.sh".source = ./dotfiles/ddc.sh;
 
     # Example: Create a file with specific text content
     ".my-custom-file".text = ''
@@ -522,6 +522,10 @@
   home.sessionVariables = {
     EDITOR = "vi";
   };
+
+  home.sessionPath = [
+    "$HOME/nixos-config/dotfiles"
+  ];
 
   # Enable user services (e.g., syncthing)
   # services.syncthing.enable = true;

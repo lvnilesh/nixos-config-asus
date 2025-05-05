@@ -23,6 +23,16 @@
 
       glxinfo # Useful for checking OpenGL rendering (part of mesa-utils)
       cudatoolkit
+      autorandr
+      xorg.xrandr
+      xorg.xset
+      xorg.xsetroot
+      xorg.xinit
+      xorg.xmodmap
+      xorg.xev
+      xorg.xrandr
+      gnome-settings-daemon # For gsettings
+      dconf # Required for gsettings
 
       # neovim
       alacritty
@@ -31,7 +41,7 @@
       # rofi
       # pfetch
       opentofu
-
+      autojump
       coreutils
       pciutils
       usbutils
@@ -49,6 +59,38 @@
       libnotify # notify-send
       glib # notify-send
       discord
+      telegram-desktop
+      whatsapp-for-linux
+      signal-desktop-bin
+      pinta
+      krita
+      gimp
+      inkscape
+      blender
+      gnome-screenshot
+      gnome-disk-utility
+      gnome-system-monitor
+      gnome-remote-desktop
+      unrar
+      ffmpeg
+
+      # GStreamer framework tools
+      gst_all_1.gstreamer
+
+      # Plugin collections by category
+      gst_all_1.gst-plugins-base
+      gst_all_1.gst-plugins-good
+      gst_all_1.gst-plugins-bad
+      gst_all_1.gst-plugins-ugly
+
+      # FFmpeg support for almost any video format
+      gst_all_1.gst-libav
+
+      # Hardware acceleration support
+      gst_all_1.gst-vaapi
+
+      # Test if GStreamer is working properly with:
+      # gst-launch-1.0 videotestsrc ! videoconvert ! autovideosink
 
       # Core Rust toolchain
       rustup

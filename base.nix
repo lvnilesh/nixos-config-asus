@@ -14,11 +14,15 @@
     ./modules/ssh.nix
     ./modules/virt.nix
     ./modules/vscode-remote.nix
-
+    ./modules/monitors.nix
+    ./modules/autorandr.nix
+    ./modules/i2c-dev.nix
     # (import "${home-manager}/nixos" )
   ];
 
   time.timeZone = "America/LosAngeles";
+  location.provider = "geoclue2";
+  services.geoclue2.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {

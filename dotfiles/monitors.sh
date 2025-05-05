@@ -1,0 +1,46 @@
+#!/run/current-system/sw/bin/zsh
+# This script sets up a multi-monitor configuration with a 4K monitor mirrored to a 1080p monitor
+# and a 5K monitor positioned to the right of the mirrored pair.
+# Ensure you have xrandr installed and available in your PATH
+# Check if xrandr is installed
+
+
+# Log everything to file
+exec > /tmp/monitors-script.log 2>&1
+
+echo "Script started at $(date)"
+
+# Check environment
+echo "USER: $USER"
+echo "DISPLAY: $DISPLAY"
+echo "PATH: $PATH"
+
+if ! command -v xrandr &> /dev/null
+then
+    echo "xrandr could not be found. Please install it first."
+    exit
+fi
+
+# Define monitor variables - replace these with your actual display names from step 1
+MONITOR_ATEM="HDMI-1"  # 4K monitor (HDMI)
+MONITOR_RETINA="DP-4"    # 5K monitor (DisplayPort)
+MONITOR_HUION="DP-2"  # 1080p monitor (DisplayPort)
+
+# Disable all monitors first to avoid conflicts
+xrandr --output $MONITOR_ATEM --off
+xrandr --output $MONITOR_RETINA --off
+xrandr --output $MONITOR_HUION --off
+
+# Set up the 1080p monitor as primary
+xrandr --output $MONITOR_HUION --auto 
+
+# Mirror the 4K monitor to the 1080p monitor
+# The "--scale 0.5x0.5" option scales down the 4K to match 1080p resolution
+xrandr --output $MONITOR_ATEM --auto --same-as $MONITOR_HUION --scale 1x1
+
+# Set up the 5K monitor to the right of the mirrored pair
+xrandr --output $MONITOR_RETINA --auto --right-of $MONITOR_HUION --primary
+
+echo "xrandr arranged the monitor layout as requested."
+echo "4K monitor ($MONITOR_ATEM) mirrored to 1080p monitor ($MONITOR_HUION) and 5K monitor ($MONITOR_RETINA) positioned to the right."
+echo "Please check your display settings to ensure everything is configured correctly."
