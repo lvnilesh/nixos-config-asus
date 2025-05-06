@@ -22,6 +22,7 @@
     ./modules/autorandr.nix
     ./modules/i2c-dev.nix
     ./modules/smb-mount.nix
+    ./modules/nfs-mount.nix
 
     # (import "${home-manager}/nixos" )
   ];

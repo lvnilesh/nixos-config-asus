@@ -374,7 +374,7 @@
           family = "JetBrains Mono";
           style = "Regular";
         };
-        font.size = 12;
+        font.size = 9;
         scrolling.multiplier = 5;
         selection.save_to_clipboard = true;
       };
@@ -468,7 +468,7 @@
       profiles.default.userSettings = {
         "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'monospace', monospace";
         "editor.fontLigatures" = true; # --- Optional: Enable Font Ligatures (JetBrains Mono supports them) ---
-        "editor.fontSize" = 12;
+        "editor.fontSize" = 10;
         "explorer.confirmDelete" = false;
         "explorer.confirmDragAndDrop" = false;
         "files.autoSave" = "onFocusChange";

@@ -14,28 +14,32 @@
     fsType = "cifs";
     options = [
       "credentials=/home/cloudgenius/.cred"
-      "uid=${toString config.users.users.cloudgenius.uid}"
-      "gid=${toString config.users.groups.users.gid}"
-      "noauto"
-      "x-systemd.automount"
-      "x-systemd.idle-timeout=60"
+      "uid=1000"
+      "gid=100"
+      "forceuid" # Add this to force the use of the specified uid
+      "forcegid" # Add this to force the use of the specified gid
+      "file_mode=0644" # Default file permissions
+      "dir_mode=0755" # Default directory permissions
+      # "noauto"
       "_netdev"
       "nofail"
     ];
   };
 
-  # # Ensure networking is fully up before attempting mounts
-  # systemd.services.mount-backup = {
-  #   description = "Mount SMB backup share";
-  #   requires = [ "network-online.target" ];
-  #   after = [ "network-online.target" ];
-  #   wantedBy = [ "multi-user.target" ];
-  #   serviceConfig = {
-  #     Type = "oneshot";
-  #     RemainAfterExit = true;
-  #     ExecStartPre = "${pkgs.coreutils}/bin/sleep 5";
-  #     ExecStart = "${pkgs.util-linux}/bin/mount -t cifs //192.168.1.8/tank_smbshare /mnt/backup -o credentials=/home/cloudgenius/.cred,uid=${toString config.users.users.cloudgenius.uid},gid=${toString config.users.groups.users.gid},sec=ntlmssp,iocharset=utf8,nofail";
-  #     ExecStop = "${pkgs.util-linux}/bin/umount /mnt/backup";
-  #   };
-  # };
+  fileSystems."/mnt/Recordings" = {
+    device = "//truenas.cg.home.arpa/Recordings";
+    fsType = "cifs";
+    options = [
+      "credentials=/home/cloudgenius/.cred"
+      "uid=1000"
+      "gid=100"
+      "forceuid" # Add this to force the use of the specified uid
+      "forcegid" # Add this to force the use of the specified gid
+      "file_mode=0644" # Default file permissions
+      "dir_mode=0755" # Default directory permissions
+      # "noauto"
+      "_netdev"
+      "nofail"
+    ];
+  };
 }
