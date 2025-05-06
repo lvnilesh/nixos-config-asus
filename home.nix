@@ -370,13 +370,42 @@
       settings = {
         env.TERM = "xterm-256color";
         window.opacity = 1.0;
+        window.decorations = "buttonless";
+        # window.startMaximized = false;
+        # window.dynamicPadding = false;
+        window.padding = {
+          x = 5;
+          y = 5;
+        };
+
         font.normal = {
           family = "JetBrains Mono";
-          style = "Regular";
+          style = "Medium";
+        };
+        font.bold = {
+          family = "JetBrains Mono";
+          style = "Heavy";
+        };
+        font.italic = {
+          family = "JetBrains Mono";
+          style = "Heavy Italic";
+        };
+        font.bold_italic = {
+          family = "JetBrains Mono";
+          style = "Medium Italic";
         };
         font.size = 9;
         scrolling.multiplier = 5;
         selection.save_to_clipboard = true;
+        general.live_config_reload = true;
+        general.import = [
+          "${pkgs.fetchFromGitHub {
+            owner = "catppuccin";
+            repo = "alacritty";
+            rev = "f6cb5a5"; # Or specify a specific commit/tag
+            sha256 = "sha256-H8bouVCS46h0DgQ+oYY8JitahQDj0V9p2cOoD4cQX+Q="; # Replace with correct hash
+          }}/catppuccin-mocha.toml"
+        ];
       };
     };
     git = {
@@ -475,7 +504,7 @@
         "git.autofetch" = true;
         "git.confirmSync" = false;
         "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
-        "workbench.colorTheme" = "Default Dark+";
+        "workbench.colorTheme" = "Nord";
         "workbench.startupEditor" = "none";
         "update.mode" = "manual";
         "update.showReleaseNotes" = false;
