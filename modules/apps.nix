@@ -34,6 +34,11 @@
       gnome-settings-daemon # For gsettings
       dconf # Required for gsettings
 
+      inetutils
+      cifs-utils
+      samba
+      avahi
+
       # neovim
       alacritty
       xwallpaper

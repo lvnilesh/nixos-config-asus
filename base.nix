@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -17,6 +21,8 @@
     ./modules/monitors.nix
     ./modules/autorandr.nix
     ./modules/i2c-dev.nix
+    ./modules/smb-mount.nix
+
     # (import "${home-manager}/nixos" )
   ];
 
@@ -40,6 +46,13 @@
   fonts.packages = with pkgs; [
     jetbrains-mono
   ];
+
+  boot.kernel.sysctl = {
+    "net.ipv6.conf.all.disable_ipv6" = 1;
+    "net.ipv6.conf.default.disable_ipv6" = 1;
+    # Optionally, disable on loopback too, though often not strictly necessary
+    # "net.ipv6.conf.lo.disable_ipv6" = 1;
+  };
 
   # Leave bluetooth off on boot, the user can enable if needed
   hardware.bluetooth.powerOnBoot = false;

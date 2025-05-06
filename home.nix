@@ -468,7 +468,7 @@
       profiles.default.userSettings = {
         "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'monospace', monospace";
         "editor.fontLigatures" = true; # --- Optional: Enable Font Ligatures (JetBrains Mono supports them) ---
-        "editor.fontSize" = 16;
+        "editor.fontSize" = 12;
         "explorer.confirmDelete" = false;
         "explorer.confirmDragAndDrop" = false;
         "files.autoSave" = "onFocusChange";
