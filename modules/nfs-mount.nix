@@ -24,10 +24,8 @@
     deps = [];
   };
 
-  fileSystems."/mnt/x" = {
-    device = "truenas.cg.home.arpa:/mnt/tank/nfs";
-    fsType = "nfs";
-    options = [
+  fileSystems = let
+    commonOptions = [
       "vers=4.2"
       "noatime"
       # "noauto"
@@ -35,5 +33,35 @@
       "nofail"
       "rw"
     ];
+  in {
+    "/mnt/nfs" = {
+      device = "truenas.cg.home.arpa:/mnt/tank/nfs";
+      fsType = "nfs";
+      options = commonOptions;
+    };
+
+    "/mnt/R" = {
+      device = "truenas.cg.home.arpa:/mnt/tank/Recordings";
+      fsType = "nfs";
+      options = commonOptions;
+    };
+
+    "/mnt/models" = {
+      device = "truenas.cg.home.arpa:/mnt/tank/models";
+      fsType = "nfs";
+      options = commonOptions;
+    };
+
+    "/mnt/Software" = {
+      device = "truenas.cg.home.arpa:/mnt/tank/Software";
+      fsType = "nfs";
+      options = commonOptions;
+    };
+
+    "/mnt/source" = {
+      device = "truenas.cg.home.arpa:/mnt/tank/source";
+      fsType = "nfs";
+      options = commonOptions;
+    };
   };
 }
