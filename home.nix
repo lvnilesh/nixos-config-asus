@@ -238,7 +238,6 @@
       bat
       neofetch
       fastfetch
-      jetbrains-mono
       albert
       (google-cloud-sdk.withExtraComponents [
         google-cloud-sdk.components.gke-gcloud-auth-plugin
@@ -495,9 +494,10 @@
 
       # --- Optional: Manage User Settings (settings.json) ---
       profiles.default.userSettings = {
-        "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'monospace', monospace";
+        "editor.fontFamily" = "'JetBrainsMono', 'monospace', monospace";
         "editor.fontLigatures" = true; # --- Optional: Enable Font Ligatures (JetBrains Mono supports them) ---
         "editor.fontSize" = 10;
+        "terminal.integrated.fontFamily" = "'JetBrainsMono', 'monospace', monospace";
         "terminal.integrated.fontSize" = 10;
         "window.zoomLevel" = -1.5;
         "explorer.confirmDelete" = false;
@@ -506,7 +506,7 @@
         "git.autofetch" = true;
         "git.confirmSync" = false;
         "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
-        "workbench.colorTheme" = "Nord";
+        "workbench.colorTheme" = "Catppuccin Mocha";
         "workbench.startupEditor" = "none";
         "update.mode" = "manual";
         "update.showReleaseNotes" = false;

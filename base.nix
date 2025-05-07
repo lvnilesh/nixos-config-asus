@@ -44,9 +44,13 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  fonts.packages = with pkgs; [
-    jetbrains-mono
-  ];
+  fonts = {
+    packages = with pkgs; [
+      jetbrains-mono
+    ];
+    fontDir.enable = true;
+    enableDefaultPackages = true;
+  };
 
   boot.kernel.sysctl = {
     "net.ipv6.conf.all.disable_ipv6" = 1;
