@@ -59,6 +59,24 @@
     # "net.ipv6.conf.lo.disable_ipv6" = 1;
   };
 
+  boot = {
+    kernelModules = ["tcp_bbr"];
+    kernel.sysctl = {
+      "net.ipv4.tcp_congestion_control" = "bbr";
+      "net.core.default_qdisc" = "fq";
+      "net.core.wmem_max" = 1073741824;
+      "net.core.rmem_max" = 1073741824;
+      "net.ipv4.tcp_rmem" = "4096 87380 1073741824";
+      "net.ipv4.tcp_wmem" = "4096 87380 1073741824";
+    };
+  };
+
+  console = {
+    packages = [pkgs.terminus_font];
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-i22b.psf.gz";
+    useXkbConfig = true;
+  };
+
   # Leave bluetooth off on boot, the user can enable if needed
   hardware.bluetooth.powerOnBoot = false;
 
@@ -76,6 +94,10 @@
   nix = {
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
+    settings = {
+      warn-dirty = false;
+      auto-optimise-store = true;
+    };
   };
 
   # Enable udev settings for yubikey personalization

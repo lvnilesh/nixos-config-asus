@@ -23,10 +23,10 @@
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  #  nix.gc = {
-  #    automatic = true;
-  #    options = "--delete-older-than 7d";
-  #  };
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 7d";
+  };
 
   nix.settings.substituters = ["https://cache.nixos.org/"];
   nix.settings.trusted-public-keys = ["cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="];
@@ -39,6 +39,25 @@
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+
+  security.polkit.enable = true;
+
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
+
   services = {
     openssh = {
       enable = true;
@@ -142,6 +161,11 @@
     # "sp5100_tco" # Example for AMD SP5100 TCO
     # Add the module specific to your hardware
   ];
+
+  hardware.cpu = {
+    intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

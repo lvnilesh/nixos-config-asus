@@ -216,16 +216,12 @@
 
   home.packages =
     (with pkgs.gnomeExtensions; [
-      # ulauncher
-      # flameshot
-      # alacritty
       caffeine
       tactile
       paperwm
       appindicator
       dash-to-dock
       vitals
-      # pop-shell
       forge
       blur-my-shell
       gsconnect
@@ -368,32 +364,45 @@
       enable = true;
       settings = {
         env.TERM = "xterm-256color";
-        window.opacity = 1.0;
-        window.decorations = "buttonless";
-        # window.startMaximized = false;
-        # window.dynamicPadding = false;
-        window.padding = {
-          x = 5;
-          y = 5;
+
+        window = {
+          opacity = 1.0;
+          decorations = "buttonless"; # Options: full, none, transparent, buttonless
+          startup_mode = "Windowed"; # Options: Windowed, Maximized, Fullscreen
+          dimensions = {
+            columns = 100; # Set the line width (number of columns)
+            lines = 30; # Set the line count (number of lines)
+          };
+          position = {
+            x = 3200; # Window position from left edge of screen (in pixels)
+            y = 1440; # Window position from top edge of screen (in pixels)
+          };
+          padding = {
+            x = 5; # Padding inside the window (horizontal)
+            y = 5; # Padding inside the window (vertical)
+          };
         };
 
-        font.normal = {
-          family = "JetBrains Mono";
-          style = "Medium";
+        font = {
+          size = 9;
+          normal = {
+            family = "JetBrains Mono";
+            style = "Medium";
+          };
+          bold = {
+            family = "JetBrains Mono";
+            style = "Heavy";
+          };
+          italic = {
+            family = "JetBrains Mono";
+            style = "Heavy Italic";
+          };
+          bold_italic = {
+            family = "JetBrains Mono";
+            style = "Medium Italic";
+          };
         };
-        font.bold = {
-          family = "JetBrains Mono";
-          style = "Heavy";
-        };
-        font.italic = {
-          family = "JetBrains Mono";
-          style = "Heavy Italic";
-        };
-        font.bold_italic = {
-          family = "JetBrains Mono";
-          style = "Medium Italic";
-        };
-        font.size = 9;
+
         scrolling.multiplier = 5;
         selection.save_to_clipboard = true;
         general.live_config_reload = true;
