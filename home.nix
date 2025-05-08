@@ -508,7 +508,7 @@
         "editor.fontSize" = 10;
         "terminal.integrated.fontFamily" = "'JetBrainsMono', 'monospace', monospace";
         "terminal.integrated.fontSize" = 10;
-        "window.zoomLevel" = -1.5;
+        "window.zoomLevel" = 0;
         "explorer.confirmDelete" = false;
         "explorer.confirmDragAndDrop" = false;
         "files.autoSave" = "onFocusChange";

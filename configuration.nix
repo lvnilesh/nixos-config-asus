@@ -158,6 +158,8 @@
   # Ensure hardware module is loaded if needed, e.g.:
   boot.kernelModules = [
     "iTCO_wdt" # Example for Intel TCO watchdog
+    "coretemp"
+    "it87"
     # "sp5100_tco" # Example for AMD SP5100 TCO
     # Add the module specific to your hardware
   ];
