@@ -1,8 +1,12 @@
 {
   pkgs,
   config,
+  lib,
+  inputs,
   ...
-}: {
+}: let
+  myAppleFonts = pkgs.callPackage ./modules/apple-fonts.nix {};
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -23,11 +27,11 @@
     ./modules/i2c-dev.nix
     ./modules/smb-mount.nix
     ./modules/nfs-mount.nix
+    ./modules/keybase.nix
 
     # (import "${home-manager}/nixos" )
   ];
-
-  time.timeZone = "America/LosAngeles";
+  time.timeZone = "America/Los_Angeles";
   location.provider = "geoclue2";
   services.geoclue2.enable = true;
 
@@ -44,9 +48,21 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  # Allow unfree packages if you haven't already
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "apple-fonts" # Add the pname from your derivation
+      # ... other unfree packages ...
+    ];
+
   fonts = {
     packages = with pkgs; [
+      myAppleFonts # Add your custom font package
       jetbrains-mono
+      # source-code-pro
+      # noto-fonts
+      # noto-fonts-emoji
+      # roboto
     ];
     fontDir.enable = true;
     enableDefaultPackages = true;
@@ -102,4 +118,5 @@
 
   # Enable udev settings for yubikey personalization
   services.udev.packages = [pkgs.yubikey-personalization];
+  services.pcscd.enable = true; # smart card daemon (pcscd) is essential for communicating with the YubiKey.
 }

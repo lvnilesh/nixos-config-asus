@@ -55,7 +55,7 @@
       opentabletdriver
       google-chrome
       floorp
-      brave
+      # brave
       python313Full
       eza
       alejandra
@@ -108,6 +108,22 @@
       rustfmt # Code formatter
       clippy # Linter
       rust-analyzer # Language server for IDEs
+
+      gnupg
+      pinentry # For passphrase entry dialogs
+      pinentry-curses
+      pinentry-gtk2
+      gpgme
+      paperkey
+      keybase
+      yubikey-personalization
+      yubikey-manager
+      pcsclite
+      pcsctools
+
+      pkgs.catppuccin
+      pkgs.catppuccin-gtk
+      pkgs.catppuccin-cursors
     ];
   };
 }
