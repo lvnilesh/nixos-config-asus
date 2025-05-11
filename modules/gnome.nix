@@ -51,7 +51,7 @@
     gnome-music
     # gnome-remote-desktop
     gnome-photos
-    # gnome-terminal
+    gnome-terminal
     gnome-tour
     yelp
   ];

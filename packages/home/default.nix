@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # Manage dotfiles
   home.file = {
     # Create a p10k.zsh configuration file

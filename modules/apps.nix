@@ -9,7 +9,7 @@
       deja-dup
       bitwarden
       obsidian
-      gnome-terminal
+      # gnome-terminal
       btop
       htop
       flatpak
