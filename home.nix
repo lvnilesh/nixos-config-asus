@@ -78,6 +78,18 @@ in {
       yq-go # yaml processor https://github.com/mikefarah/yq
       eza # A modern replacement for ‘ls’
       fzf # A command-line fuzzy finder
+      # Terminal utilities
+      fd
+      tldr
+
+      # Development tools
+      git
+      gh
+      vscode
+
+      meslo-lgs-nf # Standalone package
+      nerd-fonts.droid-sans-mono
+      nerd-fonts.fira-code
 
       # networking tools
       nmap
@@ -158,28 +170,14 @@ in {
   # systemctl --user status opentabletdriver.service
   # systemctl --user status graphical-session.target
 
-  programs = {
-    home-manager.enable = true;
-
-    zsh = {
-      enable = true;
-      autosuggestion.enable = true;
-      enableCompletion = true;
-      envExtra = ''
-        export ZOMEZSHVARIABLE="something";
-
-        alias k=kubectl;
-      '';
-      # Add code to run near the end of zsh initialization
-      initExtra = ''
-        # Attempt to remove the ls alias, ignore errors if it doesn't exist
-        unalias ls 2>/dev/null || true
-        alias ls=eza
-        # Add any other custom init commands below
-      '';
-      # OR use initExtraFirst = '' ... ''; to run earlier
+  # Terminal file manager
+  programs.lf = {
+    enable = true;
+    settings = {
+      previewer = "${pkgs.ctpv}/bin/ctpv";
     };
   };
+  programs.home-manager.enable = true;
 
   gtk = {
     enable = true;
@@ -197,7 +195,7 @@ in {
       size = 24;
     };
     font = {
-      name = "SF Pro Display"; # fc-list | grep "New York"
+      name = "SF Pro"; # "SF Pro Display"; # fc-list | grep "New York"
       package = myAppleFonts;
       size = 11;
     };

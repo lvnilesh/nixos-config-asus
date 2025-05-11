@@ -90,6 +90,7 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEWM/PQ1EF0spec86grdfOaT0/G92oV2KxPHPSe4fTp7"
     ];
+    shell = pkgs.zsh;
     extraGroups = [
       "wheel" # Enable ‘sudo’ for the user.
       "networkmanager"
@@ -101,42 +102,14 @@
       "kvm"
       "libvirt"
     ];
-
-    shell = pkgs.zsh;
-
     packages = with pkgs; [
       tree
       zsh
     ];
   };
 
-  # enable zsh and oh my zsh
-  programs = {
-    virt-manager.enable = true;
-    #    firefox.enable = true;
-    zsh = {
-      enable = true;
-      autosuggestions.enable = true;
-      zsh-autoenv.enable = true;
-      syntaxHighlighting.enable = true;
-      ohMyZsh = {
-        enable = true;
-        theme = "robbyrussell";
-        plugins = [
-          "git"
-          "npm"
-          "history"
-          "node"
-          "rust"
-          "deno"
-          "sudo"
-          "terraform"
-          "systemadmin"
-          "vi-mode"
-        ];
-      };
-    };
-  };
+  programs.zsh.enable = true;
+  programs.virt-manager.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 

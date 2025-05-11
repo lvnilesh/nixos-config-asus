@@ -1,6 +1,7 @@
 {
   imports = [
     ./alacritty
+    ./autojump
     ./brave
     ./dconf
     ./gh
@@ -8,5 +9,6 @@
     ./home
     ./starship
     ./vscode
+    ./zsh
   ];
 }

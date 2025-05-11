@@ -31,7 +31,7 @@
         size = 9;
         normal = {
           family = "SF Mono";
-          style = "Medium";
+          style = "Regular";
         };
         bold = {
           family = "SF Mono";

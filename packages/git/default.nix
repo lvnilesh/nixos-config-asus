@@ -26,14 +26,14 @@
       pu = "!git push origin `git branch --show-current`";
       pod = "push origin dev";
       pos = "push origin staging";
-      pom = "push origin main";
+      pom = "push origin master";
       poh = "push origin HEAD";
       pogm = "!git push origin gh-pages && git checkout master && git pull origin master && git rebase gh-pages && git push origin master && git checkout gh-pages";
       pomg = "!git push origin master && git checkout gh-pages && git pull origin gh-pages && git rebase master && git push origin gh-pages && git checkout master";
       plo = "pull origin";
       plod = "pull origin dev";
       plos = "pull origin staging";
-      plom = "pull origin main";
+      plom = "pull origin master";
       ploh = "pull origin HEAD";
       unstage = "reset --soft HEAD^";
       ls = "log --pretty=format:\"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\" --decorate";
@@ -41,6 +41,10 @@
       f = "!git ls-files | grep -i";
       gr = "grep -Ii";
       la = "!git config -l | grep alias | cut -c 7-";
+    };
+    extraConfig = {
+      init.defaultBranch = "master";
+      pull.rebase = true;
     };
   };
 }
