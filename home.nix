@@ -164,6 +164,14 @@ in {
     Install = {WantedBy = ["graphical-session.target"];};
   };
 
+  # The login keyring did not get unlocked when you logged into the computer.
+
+  # Enable gnome-keyring in Home Manager
+  services.gnome-keyring = {
+    enable = true;
+    components = ["pkcs11" "secrets" "ssh"];
+  };
+
   # https://github.com/NixOS/nixpkgs/issues/318274
   # systemctl list-units --user --all
   # cd ~/.config/systemd/user

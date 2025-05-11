@@ -48,6 +48,25 @@ in {
     LC_TIME = "en_US.UTF-8";
   };
 
+  # The login keyring did not get unlocked when you logged into the computer.
+  # System-wide configuration
+  services.gnome.gnome-keyring.enable = true;
+
+  # Install necessary packages
+  environment.systemPackages = with pkgs; [
+    libsecret
+    seahorse # GUI for managing keys
+  ];
+
+  # Enable PAM integration
+  security.pam.services = {
+    login.enableGnomeKeyring = true;
+    # Add your display manager here
+    gdm.enableGnomeKeyring = true; # For GDM
+    # lightdm.enableGnomeKeyring = true; # For LightDM
+    # sddm.enableGnomeKeyring = true;    # For SDDM
+  };
+
   # Allow unfree packages if you haven't already
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
