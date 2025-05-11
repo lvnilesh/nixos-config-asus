@@ -3,6 +3,7 @@
     ./alacritty
     ./autojump
     ./brave
+    ./btsync
     ./dconf
     ./gh
     ./git
