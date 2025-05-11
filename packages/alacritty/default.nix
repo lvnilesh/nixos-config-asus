@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   programs.alacritty = {
     enable = true;
     settings = {
@@ -19,7 +14,7 @@
         };
         position = {
           x = 3200; # Window position from left edge of screen (in pixels)
-          y = 1440; # Window position from top edge of screen (in pixels)
+          y = 0; # Window position from top edge of screen (in pixels)
         };
         padding = {
           x = 5; # Padding inside the window (horizontal)
@@ -28,7 +23,7 @@
       };
 
       font = {
-        size = 9;
+        size = 10;
         normal = {
           family = "SF Mono";
           style = "Regular";
