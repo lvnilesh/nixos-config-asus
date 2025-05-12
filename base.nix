@@ -36,6 +36,7 @@ in {
   services.geoclue2.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.supportedLocales = ["en_US.UTF-8/UTF-8" "hi_IN/UTF-8" "mr_IN/UTF-8" "kn_IN/UTF-8" "all"];
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -79,9 +80,28 @@ in {
       myAppleFonts # Add your custom font package
       jetbrains-mono
       # source-code-pro
-      # noto-fonts
-      # noto-fonts-emoji
       # roboto
+
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+      noto-fonts-extra # Contains many Indic scripts
+      # Individual Lohit fonts for Indic scripts
+      lohit-fonts.assamese
+      lohit-fonts.bengali
+      lohit-fonts.devanagari # For Hindi
+      lohit-fonts.gujarati
+      lohit-fonts.kannada
+      lohit-fonts.malayalam
+      lohit-fonts.marathi
+      lohit-fonts.nepali
+      lohit-fonts.odia
+      # lohit-fonts.punjabi
+      lohit-fonts.tamil
+      lohit-fonts.telugu
+      culmus # For some more exotic scripts
+      google-fonts # Comprehensive collection including many Indic fonts
+      liberation_ttf # For general coverage
     ];
     fontDir.enable = true;
     enableDefaultPackages = true;

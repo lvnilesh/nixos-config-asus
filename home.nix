@@ -15,7 +15,16 @@ in {
   # manage.
   home.username = "cloudgenius";
   home.stateVersion = "24.11"; # Set to your current NixOS/HM version
-  fonts.fontconfig.enable = true;
+
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      serif = ["New York" "Noto Serif" "Lohit"];
+      sansSerif = ["SF Pro" "Noto Sans" "Lohit"];
+      monospace = ["SF Mono" "Noto Sans Mono"];
+    };
+  };
+
   xdg.enable = true;
 
   # set cursor size and dpi for 27 inch 5k monitor
