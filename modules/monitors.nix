@@ -12,7 +12,7 @@
 
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "/home/cloudgenius/nixos-config/dotfiles/monitors.sh";
+      ExecStart = "/home/cloudgenius/nixos-config/dotfiles/monitors";
       # Add the required packages to the PATH
       Environment = [
         "PATH=${pkgs.xorg.xrandr}/bin:${pkgs.coreutils}/bin:$PATH"
