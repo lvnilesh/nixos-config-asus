@@ -8,6 +8,8 @@
     systemPackages = with pkgs; [
       deja-dup
       bitwarden
+      bitwarden-cli
+      dos2unix
       obsidian
       # gnome-terminal
       btop
