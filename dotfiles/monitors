@@ -22,9 +22,9 @@ then
 fi
 
 # Define monitor variables - replace these with your actual display names from step 1
-MONITOR_ATEM="HDMI-1"  # 4K monitor (HDMI)
-MONITOR_RETINA="DP-4"    # 5K monitor (DisplayPort)
-MONITOR_HUION="DP-2"  # 1080p monitor (DisplayPort)
+MONITOR_ATEM="HDMI-0"  # 4K monitor (HDMI)
+MONITOR_RETINA="DP-0"    # 5K monitor (DisplayPort)
+MONITOR_HUION="DP-4"  # 1080p monitor (DisplayPort)
 
 # Disable all monitors first to avoid conflicts
 xrandr --output $MONITOR_ATEM --off
@@ -39,8 +39,8 @@ xrandr --output $MONITOR_HUION --auto
 xrandr --output $MONITOR_ATEM --auto --same-as $MONITOR_HUION --scale 1x1
 
 # Set up the 5K monitor to the right of the mirrored pair
-xrandr --output $MONITOR_RETINA --auto --right-of $MONITOR_HUION --primary
+xrandr --output $MONITOR_RETINA --auto --above $MONITOR_HUION --primary
 
 echo "xrandr arranged the monitor layout as requested."
-echo "4K monitor ($MONITOR_ATEM) mirrored to 1080p monitor ($MONITOR_HUION) and 5K monitor ($MONITOR_RETINA) positioned to the right."
+echo "4K monitor ($MONITOR_ATEM) mirrored to 1080p monitor ($MONITOR_HUION) and 5K monitor ($MONITOR_RETINA) positioned above."
 echo "Please check your display settings to ensure everything is configured correctly."

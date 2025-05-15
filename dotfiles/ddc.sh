@@ -7,8 +7,11 @@
 # or `ddcutil capabilities` command
 
 # ddcutil detect | grep -B 1 "card1-DP-3" | grep "I2C bus" | awk '{print $3}' | cut -d'-' -f2
+# ddcutil detect | grep -B 1 "card0-DP-2" | grep "I2C bus" | awk '{print $3}' | cut -d'-' -f2
+# ddcutil --bus=17 getvcp 10
+# ddcutil --bus=17 setvcp 10 37
 
-BUS=9
+BUS=17
 
 # Function to get current brightness
 get_current_brightness() {
