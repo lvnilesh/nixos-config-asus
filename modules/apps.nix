@@ -41,6 +41,8 @@
       samba
       avahi
 
+      mongosh
+
       # neovim
       alacritty
       xwallpaper
