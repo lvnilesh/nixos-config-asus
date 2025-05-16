@@ -30,6 +30,15 @@
     user = "cloudgenius";
   };
 
+  # Selectively disable some GNOME extensions
+  #
+  # services.xserver.desktopManager.gnome = {
+  #   extraGSettingsOverrides = ''
+  #     [org.gnome.shell]
+  #     disabled-extensions=['window-list@gnome-shell-extensions.gcampax.github.com']
+  #   '';
+  # };
+
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
@@ -50,6 +59,7 @@
     gnome-maps
     gnome-music
     # gnome-remote-desktop
+    gnome-shell-extensions # (this is a meta package, so it will pull in all the extensions)
     gnome-photos
     gnome-terminal
     gnome-tour

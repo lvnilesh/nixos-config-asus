@@ -35,16 +35,18 @@ in {
 
   home.packages =
     (with pkgs.gnomeExtensions; [
-      caffeine
-      tactile
-      paperwm
       appindicator
-      dash-to-dock
-      vitals
-      forge
       blur-my-shell
-      gsconnect
-      quick-settings-tweaker
+      caffeine
+      dash-to-dock
+      tiling-shell
+      vitals
+
+      # tactile
+      # paperwm
+      # forge
+      # gsconnect
+      # quick-settings-tweaker
     ])
     ++ (with pkgs; [
       myAppleFonts
