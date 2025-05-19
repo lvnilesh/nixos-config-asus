@@ -8,6 +8,7 @@
     ./gh
     ./git
     ./home
+    ./polybar
     ./starship
     ./vscode
     ./zsh

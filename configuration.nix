@@ -77,7 +77,25 @@
     };
   };
 
-  # services.libinput.enable = true;   # Enable touchpad support (enabled default in most desktopManager).
+  services.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
+  services.libinput.touchpad = {
+    naturalScrolling = true;
+    tapping = true;
+    disableWhileTyping = true;
+  };
+
+  # Enable the touchegg service
+  services.touchegg.enable = true;
+  #
+  # touchegg --debug
+  # xev # to get the keycode
+
+  # sudo systemctl restart touchegg.service
+  # sudo systemctl enable touchegg.service
+  # sudo systemctl start touchegg.service
+  # sudo systemctl status touchegg.service
+  #
+  # flatpak install flathub com.github.joseexposito.touche
 
   # for global user
   users.defaultUserShell = pkgs.zsh;
@@ -105,6 +123,17 @@
     packages = with pkgs; [
       tree
       zsh
+      touchegg # Install touchegg for gesture support
+      xdotool
+      # Test manually
+      # xdotool key alt+Left
+      # xdotool key alt+Right
+      # xdotool key alt+Shift+Left
+      # xdotool key alt+Shift+Right
+      # xdotool key alt+Shift+Up
+      # xdotool key alt+Shift+Down
+      # xdotool key alt+Shift+Page_Up
+      # xdotool key alt+Shift+Page_Down
     ];
   };
 

@@ -61,6 +61,15 @@
       floorp
       # brave
       python313Full
+      gcc
+      gnumake
+      stdenv.cc.cc.lib
+      python313
+      python313Packages.pip
+      python313Packages.setuptools
+      python313Packages.wheel
+      python313Packages.numpy # Get pre-built numpy from nixpkgs
+
       eza
       alejandra
       dunst # notify-send
@@ -80,8 +89,14 @@
       gnome-disk-utility
       gnome-system-monitor
       gnome-remote-desktop
+      gnome-tweaks # For managing extensions
+      gnome-shell
+
       unrar
       ffmpeg
+
+      davinci-resolve # Free version
+      # or davinci-resolve-studio for the paid version
 
       # GStreamer framework tools
       gst_all_1.gstreamer

@@ -8,6 +8,8 @@
         "dash-to-dock@micxgx.gmail.com"
         "tilingshell@ferrarodomenico.com"
         "Vitals@CoreCoding.com"
+        "mediacontrols@cliffniff.github.com"
+        "just-perfection-desktop@just-perfection"
 
         # "tactile@lundal.io"
         # "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
@@ -18,16 +20,94 @@
         # "paperwm@paperwm.github.com"
         # "datemenu-formatter@marcinjakubowski.github.com"
         # "openweather-extension@jenslody.de"
-        # "just-perfection-desktop@just-perfection"
         # "space-bar@luchrioh"
         # "undecorate@sun.wxg@gmail.com"
         # "tophat@fflewddur.github.io"
         # "AlphabeticalAppGrid@stuarthayhurst"
       ];
     };
+
+    "org/gnome/shell/extensions/just-perfection" = {
+      # Workspace Settings
+      workspace-popup-mode = 1; # 0 = Default, 1 = Compact (bigger thumbnails)
+      workspace-switcher-size = 15; # Scale factor (default is 10, higher values = bigger)
+      workspace-switcher-should-show = true; # Show workspace switcher popup
+      # Enable workspace switcher click to main view
+      workspace-switcher-popup-only-on-primary = false;
+      workspace-switcher-click-to-main-view = true;
+      # Panel Settings
+      panel = true; # Show top panel
+      panel-in-overview = true; # Show panel in overview
+      panel-notification-icon = true; # Show notification icon
+      panel-arrow = true; # Show panel arrow
+      panel-corner-size = 0; # Panel corner size (0 = default)
+      panel-button-padding-size = 0; # Adjust panel button padding
+      panel-indicator-padding-size = 0; # Adjust panel indicator padding
+      clock-menu = true; # Show clock menu
+      calendar = true; # Show calendar in clock menu
+      week-numbers = false; # Show week numbers in calendar
+
+      # Start Menu/Dash Settings
+      dash = true; # Show dash
+      dash-icon-size = 0; # Dash icon size (0 = default)
+
+      # Overview Settings and Behavior
+      search = true; # Show search
+      ripple-box = true; # Show ripple animation when opening activities
+      keyboard-layout = true; # Show keyboard layout
+      accessibility-menu = true; # Show accessibility menu
+      hot-corner = true; # Enable hot corner
+      osd = true; # Show on-screen display
+      window-demands-attention-focus = true; # Auto focus windows that demand attention
+      window-picker-icon = true; # Show app icon in window picker
+      type-to-search = true; # Type to search
+
+      # Animation Settings
+      animation = true; # Enable animations
+      animation-speed = 1.0; # Animation speed (1.0 = normal)
+
+      # Background Settings
+      background-menu = true; # Show background menu
+      theme = true; # Enable theme compatibility
+      activities-button = true; # Show activities button
+
+      # Screen Related Settings
+      double-super-to-appgrid = true; # Double Super key press to show app grid
+      overlay-key = true; # Enable overlay key (Super)
+
+      # Window Controls
+      window-maximized-border = true; # Enable window maximized border
+      window-preview-caption = true; # Show window preview caption
+      window-preview-close-button = true; # Show window preview close button
+
+      # Other Visual Elements
+      startup-status = 0; # 0 = Default
+      power-icon = true; # Show power icon
+      workspace-wrap-around = false; # Wrap around workspaces when reaching the end
+      notification-banner-position = 0; # 0 = Top Start, 1 = Top Center, 2 = Top End
+
+      # App Grid Settings
+      app-grid-animation = true; # Enable app grid animation
+      app-grid-icon-size = 0; # App grid icon size (0 = default)
+
+      # Miscellaneous
+      looking-glass-width = 0; # Looking glass width (0 = default)
+      looking-glass-height = 0; # Looking glass height (0 = default)
+      show-apps-button = true; # Show applications button
+    };
+
     "org/gnome/shell/extensions/caffeine" = {
       show-indicator = true;
     };
+
+    "org/gnome/shell/extensions/blur-my-shell" = {
+      blur-enabled = true;
+      blur-strength = 10.0; # Adjust as desired
+      blur-background = true;
+      blur-background-opacity = 0.8; # Adjust as desired
+      blur-background-saturation = 1.0; # Adjust as desired
+    };
+
     "org/gnome/desktop/interface".show-battery-percentage = true;
     "org/gnome/shell/extensions/dash-to-dock" = {
       # --- Common Dash to Dock Settings Examples ---

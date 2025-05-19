@@ -20,8 +20,23 @@ in {
     enable = true;
     defaultFonts = {
       serif = ["New York" "Noto Serif" "Lohit"];
-      sansSerif = ["SF Pro" "Noto Sans" "Lohit"];
+      sansSerif = ["SF Pro Display" "Noto Sans" "Lohit"];
       monospace = ["SF Mono" "Noto Sans Mono"];
+    };
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      document-font-name = "New York 10";
+      monospace-font-name = "SF Mono 10";
+      font-name = "SF Pro Display 10";
+    };
+
+    # Font rendering settings
+    "org/gnome/settings-daemon/plugins/xsettings" = {
+      antialiasing = "rgba";
+      hinting = "slight";
+      rgba-order = "rgb";
     };
   };
 
@@ -41,6 +56,8 @@ in {
       dash-to-dock
       tiling-shell
       vitals
+      media-controls
+      just-perfection
 
       # tactile
       # paperwm
@@ -214,32 +231,20 @@ in {
       size = 24;
     };
     font = {
-      name = "SF Pro"; # "SF Pro Display"; # fc-list | grep "New York"
+      name = "SF Pro Display"; # fc-list | grep "New York"
       package = myAppleFonts;
-      size = 11;
+      size = 10;
     };
-    # font = {
-    #   name = "Source Code Pro";
-    #   package = pkgs.source-code-pro;
-    #   size = 11;
-    # };
-    # font = {
-    #   name = "Noto Sans";
-    #   package = pkgs.noto-fonts;
-    #   size = 11;
-    # };
-    # font = {
-    #   name = "Roboto";
-    #   package = pkgs.roboto-font;
-    #   size = 11;
-    # };
+
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = true;
       gtk-theme-name = "Tokyonight-Dark-BL";
       icon-theme-name = "Papirus-Dark";
       cursor-theme-name = "Bibata-Modern-Ice";
       cursor-size = 24;
-      gtk-font-name = "SF Pro Display 11";
+      gtk-font-name = "SF Pro Display 10";
+      gtk-document-font-name = "New York 10";
+      gtk-monospace-font-name = "SF Mono 10";
       gtk-xft-dpi = 218000;
     };
     gtk4.extraConfig = {
@@ -248,7 +253,9 @@ in {
       icon-theme-name = "Papirus-Dark";
       cursor-theme-name = "Bibata-Modern-Ice";
       cursor-size = 24;
-      gtk-font-name = "SF Pro Display 11";
+      gtk-font-name = "SF Pro Display 10";
+      gtk-document-font-name = "New York 10";
+      gtk-monospace-font-name = "SF Mono 10";
       gtk-xft-dpi = 218000;
     };
   };

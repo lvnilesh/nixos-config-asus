@@ -52,4 +52,91 @@
     Comment[en_US]=Unlock keyring at startup
     Comment=Unlock keyring at startup
   '';
+
+  home.file.".config/touchegg/touchegg.conf".text = ''
+    <touchégg>
+      <settings>
+        <property name="animation_delay">150</property>
+        <property name="action_execute_threshold">20</property>
+        <property name="color">auto</property>
+        <property name="borderColor">auto</property>
+      </settings>
+
+      <application name="All">
+        <!-- Switch to workspace left with 3-finger swipe right -->
+        <gesture type="SWIPE" fingers="3" direction="RIGHT">
+          <action type="RUN_COMMAND">
+            <command>xdotool key alt+Left</command>
+            <repeat>false</repeat>
+            <on>end</on>
+          </action>
+        </gesture>
+
+        <!-- Switch to workspace right with 3-finger swipe left -->
+        <gesture type="SWIPE" fingers="3" direction="LEFT">
+          <action type="RUN_COMMAND">
+            <command>xdotool key alt+Right</command>
+            <repeat>false</repeat>
+            <on>end</on>
+          </action>
+        </gesture>
+
+        <!-- Switch to workspace left with 4-finger swipe right -->
+        <gesture type="SWIPE" fingers="4" direction="RIGHT">
+          <action type="RUN_COMMAND">
+            <command>xdotool key alt+Left</command>
+            <repeat>false</repeat>
+            <on>end</on>
+          </action>
+        </gesture>
+
+        <!-- Switch to workspace right with 4-finger swipe left -->
+        <gesture type="SWIPE" fingers="4" direction="LEFT">
+          <action type="RUN_COMMAND">
+            <command>xdotool key alt+Right</command>
+            <repeat>false</repeat>
+            <on>end</on>
+          </action>
+        </gesture>
+
+
+        <!-- Show all windows (Activities overview) with 3-finger swipe up -->
+        <gesture type="SWIPE" fingers="3" direction="UP">
+          <action type="RUN_COMMAND">
+            <command>xdotool key super</command>
+            <repeat>false</repeat>
+            <on>end</on>
+          </action>
+        </gesture>
+
+        <!-- Add 4-finger swipe down to dismiss overview -->
+        <gesture type="SWIPE" fingers="3" direction="DOWN">
+          <action type="RUN_COMMAND">
+            <command>xdotool key Escape</command>
+            <repeat>false</repeat>
+            <on>end</on>
+          </action>
+        </gesture>
+
+
+        <!-- Show all windows (Activities overview) with 4-finger swipe up -->
+        <gesture type="SWIPE" fingers="4" direction="UP">
+          <action type="RUN_COMMAND">
+            <command>xdotool key super</command>
+            <repeat>false</repeat>
+            <on>end</on>
+          </action>
+        </gesture>
+
+        <!-- Add 4-finger swipe down to dismiss overview -->
+        <gesture type="SWIPE" fingers="4" direction="DOWN">
+          <action type="RUN_COMMAND">
+            <command>xdotool key Escape</command>
+            <repeat>false</repeat>
+            <on>end</on>
+          </action>
+        </gesture>
+      </application>
+    </touchégg>
+  '';
 }

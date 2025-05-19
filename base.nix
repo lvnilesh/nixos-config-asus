@@ -28,6 +28,8 @@ in {
     ./modules/smb-mount.nix
     ./modules/nfs-mount.nix
     ./modules/keybase.nix
+    # ./modules/pro-audio.nix
+    ./modules/consumer-audio.nix
 
     # (import "${home-manager}/nixos" )
   ];
@@ -57,6 +59,9 @@ in {
   environment.systemPackages = with pkgs; [
     libsecret
     seahorse # GUI for managing keys
+    bluez
+    bluez-tools
+    blueman # Bluetooth manager with GUI
   ];
 
   # Enable PAM integration
@@ -132,8 +137,28 @@ in {
     useXkbConfig = true;
   };
 
-  # Leave bluetooth off on boot, the user can enable if needed
-  hardware.bluetooth.powerOnBoot = false;
+  # Configure Bluetooth audio if needed
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        AutoConnect = true;
+        FastConnectable = true;
+      };
+      # Find mac address using `bluetoothctl devices | grep -i "Trackpad"`
+      "4C:74:BF:F2:1F:9E" = {
+        AutoConnect = "true";
+        Trusted = "true";
+        ReconnectAttempts = "7";
+        ReconnectIntervals = "1, 2, 4, 8, 16, 32, 64";
+      };
+    };
+  };
+
+  # Enable Bluetooth-related services
+  services.blueman.enable = true;
 
   # Enable auto-upgrades.
   system.autoUpgrade = {
