@@ -9,12 +9,12 @@
         decorations = "buttonless"; # Options: full, none, transparent, buttonless
         startup_mode = "Windowed"; # Options: Windowed, Maximized, Fullscreen
         dimensions = {
-          columns = 100; # Set the line width (number of columns)
-          lines = 30; # Set the line count (number of lines)
+          columns = 120; # Set the line width (number of columns)
+          lines = 50; # Set the line count (number of lines)
         };
         position = {
-          x = 3200; # Window position from left edge of screen (in pixels)
-          y = 0; # Window position from top edge of screen (in pixels)
+          x = 1000; # Window position from left edge of screen (in pixels)
+          y = 100; # Window position from top edge of screen (in pixels)
         };
         padding = {
           x = 5; # Padding inside the window (horizontal)
@@ -23,7 +23,7 @@
       };
 
       font = {
-        size = 10;
+        size = 8; # Font size in pixels
         normal = {
           family = "SF Mono";
           style = "Regular";
@@ -53,6 +53,15 @@
           sha256 = "sha256-H8bouVCS46h0DgQ+oYY8JitahQDj0V9p2cOoD4cQX+Q="; # Replace with correct hash
         }}/catppuccin-mocha.toml"
       ];
+
+      # Add this to make Alacritty automatically start Zellij
+      terminal.shell = {
+        program = "${pkgs.zellij}/bin/zellij";
+        args = [];
+        # args = ["--layout" "default" "--session" "default"];
+      };
+      #
+      #
     };
   };
 }

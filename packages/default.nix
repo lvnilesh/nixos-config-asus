@@ -8,9 +8,13 @@
     ./gh
     ./git
     ./home
+    ./kitty
+    ./lazydocker
+    ./lazygit
     ./polybar
     ./starship
     ./vscode
+    ./zellij
     ./zsh
   ];
 }

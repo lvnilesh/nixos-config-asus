@@ -41,10 +41,29 @@
       f = "!git ls-files | grep -i";
       gr = "grep -Ii";
       la = "!git config -l | grep alias | cut -c 7-";
+      lg = "lazygit";
     };
     extraConfig = {
       init.defaultBranch = "master";
       pull.rebase = true;
+    };
+  };
+
+  # Configure Lazygit
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      gui = {
+        showIcons = true;
+        theme = {
+          lightTheme = false;
+          activeBorderColor = ["green" "bold"];
+          inactiveBorderColor = ["white"];
+        };
+      };
+      git = {
+        autoFetch = true;
+      };
     };
   };
 }

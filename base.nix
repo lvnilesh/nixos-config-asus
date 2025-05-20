@@ -30,6 +30,8 @@ in {
     ./modules/keybase.nix
     # ./modules/pro-audio.nix
     ./modules/consumer-audio.nix
+    ./modules/midi.nix
+    ./modules/midi-rules.nix
 
     # (import "${home-manager}/nixos" )
   ];

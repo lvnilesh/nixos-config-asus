@@ -43,8 +43,13 @@
 
       mongosh
 
-      # neovim
+      lazydocker
+      lazygit
+
+      neovim
+
       alacritty
+      kitty
       xwallpaper
       # pcmanfm
       # rofi

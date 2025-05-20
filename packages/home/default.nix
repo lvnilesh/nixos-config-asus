@@ -1,4 +1,26 @@
 {pkgs, ...}: {
+  # Create a custom GTK CSS file to reduce title bar height
+  home.file.".config/gtk-3.0/gtk.css".text = ''
+    /* Reduce title bar height */
+    headerbar.default-decoration {
+      min-height: 0px;
+      padding-top: 1px;     /* Adjust this value to reduce from top */
+      padding-bottom: 1px;  /* Adjust this value to reduce from bottom */
+    }
+
+    headerbar.default-decoration button.titlebutton {
+      min-height: 0px;
+      min-width: 0px;
+      padding: 1px;         /* Make buttons smaller */
+    }
+
+    /* Reduce window title bar height */
+    .titlebar {
+      min-height: 0px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+  '';
   # Manage dotfiles
   home.file = {
     # Create a p10k.zsh configuration file

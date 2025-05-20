@@ -27,9 +27,9 @@ in {
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
-      document-font-name = "New York 10";
-      monospace-font-name = "SF Mono 10";
-      font-name = "SF Pro Display 10";
+      document-font-name = "New York 8";
+      monospace-font-name = "SF Mono 8";
+      font-name = "SF Pro Display 8";
     };
 
     # Font rendering settings
@@ -228,34 +228,36 @@ in {
     cursorTheme = {
       name = "Bibata-Modern-Ice";
       package = pkgs.bibata-cursors;
-      size = 24;
+      size = 16;
     };
     font = {
       name = "SF Pro Display"; # fc-list | grep "New York"
       package = myAppleFonts;
-      size = 10;
+      size = 8;
     };
 
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = true;
       gtk-theme-name = "Tokyonight-Dark-BL";
+      enable-animations = true;
       icon-theme-name = "Papirus-Dark";
       cursor-theme-name = "Bibata-Modern-Ice";
-      cursor-size = 24;
-      gtk-font-name = "SF Pro Display 10";
-      gtk-document-font-name = "New York 10";
-      gtk-monospace-font-name = "SF Mono 10";
+      cursor-size = 16;
+      gtk-font-name = "SF Pro Display 8";
+      gtk-document-font-name = "New York 8";
+      gtk-monospace-font-name = "SF Mono 8";
       gtk-xft-dpi = 218000;
     };
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = true;
       gtk-theme-name = "Tokyonight-Dark-BL";
+      enable-animations = true;
       icon-theme-name = "Papirus-Dark";
       cursor-theme-name = "Bibata-Modern-Ice";
-      cursor-size = 24;
-      gtk-font-name = "SF Pro Display 10";
-      gtk-document-font-name = "New York 10";
-      gtk-monospace-font-name = "SF Mono 10";
+      cursor-size = 16;
+      gtk-font-name = "SF Pro Display 8";
+      gtk-document-font-name = "New York 8";
+      gtk-monospace-font-name = "SF Mono 8";
       gtk-xft-dpi = 218000;
     };
   };

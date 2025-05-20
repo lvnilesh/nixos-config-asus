@@ -1,5 +1,18 @@
 {
   dconf.settings = {
+    "org/gnome/desktop/wm/preferences" = {
+      # Optionally, you can change the button layout here
+      button-layout = "appmenu:minimize,maximize,close";
+      # Reduce title bar font size
+      titlebar-font = "Sans 9"; # Smaller font for title bars
+    };
+
+    # Enable minimize and maximize buttons
+    "org/gnome/desktop/wm/preferences" = {
+      action-minimize = "minimize";
+      action-maximize = "maximize";
+    };
+
     "org/gnome/shell" = {
       enabled-extensions = [
         "appindicatorsupport@rgcjonas.gmail.com"
