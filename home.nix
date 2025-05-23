@@ -113,7 +113,6 @@ in {
       # Development tools
       git
       gh
-      vscode
 
       meslo-lgs-nf # Standalone package
       nerd-fonts.droid-sans-mono

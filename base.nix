@@ -151,6 +151,14 @@ in {
       };
       # Find mac address using `bluetoothctl devices | grep -i "Trackpad"`
       "4C:74:BF:F2:1F:9E" = {
+        #  Big Trackpad
+        AutoConnect = "true";
+        Trusted = "true";
+        ReconnectAttempts = "7";
+        ReconnectIntervals = "1, 2, 4, 8, 16, 32, 64";
+      };
+      "50:C2:75:77:68:48" = {
+        # Jabra Evolve2 65
         AutoConnect = "true";
         Trusted = "true";
         ReconnectAttempts = "7";

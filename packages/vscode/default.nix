@@ -3,10 +3,16 @@
   lib,
   config,
   ...
-}: {
+}: let
+  unstable = import <nixos-unstable> {
+    config = {
+      allowUnfree = true;
+    };
+  };
+in {
   programs.vscode = {
-    enable = true;
-    package = pkgs.vscode; # package = pkgs.vscodium;
+    enable = true; # lib.mkForce true;
+    package = lib.mkForce unstable.vscode; # pkgs.vscode-fhs; # pkgs.vscode; # package = pkgs.vscodium;
     # --- Optional: Manage Extensions ---
     # Uncomment and add extensions you want managed by Home Manager
     # extensions = with pkgs.vscode-extensions; [
@@ -27,23 +33,49 @@
     # ];
     # --- Optional: Manage User Settings (settings.json) ---
     profiles.default.userSettings = {
+      "chat.editor.fontSize" = 8;
+      "diffEditor.ignoreTrimWhitespace" = true;
       "editor.fontFamily" = "'SF Mono', 'monospace', monospace";
-      "editor.fontLigatures" = true; # --- Optional: Enable Font Ligatures (JetBrains Mono supports them) ---
-      "editor.fontSize" = 10;
-      "terminal.integrated.fontFamily" = "'SF Mono', 'monospace', monospace";
-      "terminal.integrated.fontSize" = 10;
-      "window.zoomLevel" = 0;
+      "editor.fontLigatures" = true;
+      "editor.fontSize" = 8;
+      "editor.minimap.enabled" = false;
       "explorer.confirmDelete" = false;
       "explorer.confirmDragAndDrop" = false;
       "files.autoSave" = "onFocusChange";
       "git.autofetch" = true;
       "git.confirmSync" = false;
-      "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
-      "workbench.colorTheme" = "Catppuccin Mocha";
-      "workbench.startupEditor" = "none";
+      # "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
+      "telemetry.telemetryLevel" = "off";
+      # "terminal.integrated.allowRoot" = true;
+      "terminal.integrated.copyOnSelection" = true;
+      "terminal.integrated.defaultProfile.linux" = "zsh";
+      "terminal.integrated.enablePersistentSessions" = false;
+      "terminal.integrated.enableMultiLinePasteWarning" = "never";
+      "terminal.integrated.fontFamily" = "'SF Mono', 'monospace', monospace";
+      "terminal.integrated.fontSize" = 8;
+      "terminal.integrated.inheritEnv" = true;
+      "terminal.integrated.profiles.linux" = {
+        "zsh" = {
+          "args" = [
+            "-l"
+            "-c"
+            "zellij"
+          ];
+          "env" = {
+            "NO_NEW_PRIVILEGES" = "0";
+          };
+          "overrideName" = true;
+          "path" = "${pkgs.zsh}/bin/zsh";
+        };
+      };
+      "terminal.integrated.shellIntegration.enabled" = true;
       "update.mode" = "manual";
       "update.showReleaseNotes" = false;
-      "diffEditor.ignoreTrimWhitespace" = true;
+      "window.zoomLevel" = 0;
+      "workbench.activityBar.location" = "top";
+      "workbench.colorTheme" = "Catppuccin Mocha";
+      "workbench.startupEditor" = "none";
+      "workbench.editor.enablePreview" = false;
     };
   };
 }
