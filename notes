@@ -1,0 +1,9 @@
+touch ~/.cred
+username=value
+password=value
+domain=value
+
+mkdir -p /mnt
+
+albert shortcut
+commenting shortcut in vscode

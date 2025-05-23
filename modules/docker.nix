@@ -26,6 +26,6 @@
 
   hardware.nvidia-container-toolkit.enable = true;
   # Despite that, GPU support in containers wont work without # virtualisation.docker.enableNvidia = true;
-  # docker run --rm --runtime=nvidia --device nvidia.com/gpu=all ubuntu nvidia-smi
+  # docker run --rm --device nvidia.com/gpu=all ubuntu nvidia-smi
   # docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 }

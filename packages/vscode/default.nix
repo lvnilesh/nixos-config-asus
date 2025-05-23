@@ -2,17 +2,28 @@
   pkgs,
   lib,
   config,
+# inputs,
   ...
-}: let
-  unstable = import <nixos-unstable> {
-    config = {
-      allowUnfree = true;
-    };
-  };
-in {
+}: 
+#
+#
+#
+# let
+#  unstable = inputs.nixos-unstable.legacyPackages.${pkgs.system}; # Use legacyPackages and pkgs.system
+
+#  unstable = import <nixos-unstable> {
+#    config = {
+#      allowUnfree = true;
+#    };
+#  };
+# in
+#
+#
+#
+ {
   programs.vscode = {
     enable = true; # lib.mkForce true;
-    package = lib.mkForce unstable.vscode; # pkgs.vscode-fhs; # pkgs.vscode; # package = pkgs.vscodium;
+    package = pkgs.vscode; # lib.mkForce unstable.vscode; # pkgs.vscode-fhs; # pkgs.vscode; # package = pkgs.vscodium;
     # --- Optional: Manage Extensions ---
     # Uncomment and add extensions you want managed by Home Manager
     # extensions = with pkgs.vscode-extensions; [
@@ -68,6 +79,7 @@ in {
           "path" = "${pkgs.zsh}/bin/zsh";
         };
       };
+      "terminal.integrated.sendKeybindingsToShell"= true;      
       "terminal.integrated.shellIntegration.enabled" = true;
       "update.mode" = "manual";
       "update.showReleaseNotes" = false;
