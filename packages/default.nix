@@ -15,6 +15,7 @@
     ./starship
     ./vscode
     ./zellij
+    ./zoom-us
     ./zsh
   ];
 }

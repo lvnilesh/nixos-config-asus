@@ -5,10 +5,13 @@
   ...
 }: let
   myAppleFonts = pkgs.callPackage ./modules/apple-fonts.nix {};
+  # screenpenEnv = pkgs.callPackage ./packages/screenpen {};
 in {
   imports = [
     ./vitals.nix
     ./packages
+    # (import ./modules/screenpen.nix {inherit config pkgs screenpenEnv;})
+    (import ./modules/screenpen.nix)
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

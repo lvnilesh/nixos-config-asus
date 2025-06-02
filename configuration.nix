@@ -68,14 +68,13 @@
     };
     flatpak.enable = true;
     printing.enable = true;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      # jack.enable = true; # Enable if you need JACK support
-    };
   };
+
+  services.fwupd.enable = true;
+  # sudo systemctl status fwupd.service
+  # fwupdmgr get-updates
+  # fwupdmgr refresh
+  # fwupdmgr update
 
   services.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.touchpad = {

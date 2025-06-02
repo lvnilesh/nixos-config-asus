@@ -111,6 +111,12 @@
 
     "org/gnome/shell/extensions/caffeine" = {
       show-indicator = true;
+      # Set duration to 0, which means "never" or "infinity"
+      duration = 0;
+      auto-sleep = false; # Prevent auto-sleep even when active
+      # hot-key = "<Super>c"; # Example: set a hotkey (needs correct dconf key format for keys)
+      # icon-type = "latte"; # Use latte icon (default is coffee)
+      # hide-launcher-icon = true; # Show icon in app launcher
     };
 
     "org/gnome/shell/extensions/blur-my-shell" = {
@@ -133,15 +139,18 @@
       # Max icon size in pixels when icon-size-fixed = true
       dash-max-icon-size = 48; # Adjust as desired
 
-      # Intellihide ('ALL_WINDOWS', 'MAXIMIZED_WINDOWS', 'NO_AUTOHIDE')
-      intellihide-mode = "ONLY_FOCUSED_WINDOWS"; # Adjust as desired
+      # Show mountable volumes on the dock
+      "show-mounts" = true;
+
+      # Intellihide ('ALL_WINDOWS', 'MAXIMIZED_WINDOWS', 'NO_AUTOHIDE' 'ONLY_FOCUSED_WINDOWS')
+      intellihide-mode = "ALL_WINDOWS"; # Adjust as desired
       # Require pressure to activate intellihide (true/false)
       require-pressure-to-show = true;
       # Pressure threshold (adjust sensitivity)
       pressure-threshold = 150.0; # Default is often 150.0
 
       # Dock visibility ('PRIMARY', 'ALL', 'FOCUS') - Monitor selection
-      preferred-monitor-signal = "PRIMARY"; # Show only on primary monitor
+      preferred-monitor-signal = "SECONDARY"; # Show only on primary monitor
       # Or show on all monitors:
       # preferred-monitor-signal = "ALL";
 
@@ -214,12 +223,12 @@
       ];
     };
 
-    # Define Custom Keybinding 0: Ulauncher
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      name = "Ulauncher";
-      command = "ulauncher-toggle";
-      binding = "<Super>space";
-    };
+    # # Define Custom Keybinding 0: Ulauncher
+    # "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+    #   name = "Ulauncher";
+    #   command = "ulauncher-toggle";
+    #   binding = "<Super>space";
+    # };
 
     # Define Custom Keybinding 1: Flameshot
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {

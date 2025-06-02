@@ -62,6 +62,13 @@
     hydrogen
     guitarix
     zynaddsubfx
+    helvum
+    tuxguitar
+    musescore
+    rosegarden
+    qtractor
+    lmms # Linux MultiMedia Studio
+    yoshimi # Software synthesizer
 
     # VST host and plugins
     carla
@@ -72,9 +79,6 @@
     qmidinet # For network MIDI if needed
     pmidi # Simple MIDI player and recorder
     rtmidi # Real-time MIDI processing library
-    # midi editing
-    musescore
-    rosegarden
 
     # audio analysis
     sonic-visualiser # For analyzing audio files

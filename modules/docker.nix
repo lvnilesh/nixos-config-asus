@@ -8,6 +8,9 @@
     nvidia-container-toolkit
     runc
     libnvidia-container
+    # docker
+    # docker-compose
+    # docker-buildx
   ];
 
   # Enable Docker

@@ -16,6 +16,25 @@
       htop
       flatpak
 
+      micromamba
+      libglvnd
+      file
+      python3
+      mesa
+      xorg.libX11
+      xorg.libXrandr
+      xorg.libXrender
+      xorg.libXcursor
+      xorg.xdpyinfo
+
+      fontconfig
+      freetype
+      zlib
+      gcc
+      glib
+
+      xournalpp
+
       # libreoffice-fresh
       # pdfarranger
       # gImageReader
@@ -75,6 +94,12 @@
       python313Packages.wheel
       python313Packages.numpy # Get pre-built numpy from nixpkgs
 
+      pipx
+      stdenv.cc.cc.lib
+      gccStdenv
+      # export LD_LIBRARY_PATH="/run/current-system/sw/lib:$LD_LIBRARY_PATH"
+      gperftools #  For performance profiling and tcmalloc
+
       eza
       alejandra
       dunst # notify-send
@@ -99,6 +124,9 @@
 
       unrar
       ffmpeg
+
+      nftables
+      iptables
 
       davinci-resolve # Free version
       # or davinci-resolve-studio for the paid version

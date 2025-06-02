@@ -32,7 +32,7 @@ in {
 
     # PipeWire configuration
     extraConfig.pipewire = {
-      "99-pro-audio.conf" = {
+      "99-good-audio.conf" = {
         context.properties = {
           default.clock.rate = 48000;
           default.clock.quantum = 256; # Lower for less latency
@@ -91,7 +91,6 @@ in {
     # distrho
     x42-plugins
     zrythm
-    qtractor
 
     # Additional utilities
     jack_capture # Record audio

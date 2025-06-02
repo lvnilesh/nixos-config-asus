@@ -88,7 +88,7 @@
         <!-- Switch to workspace left with 3-finger swipe right -->
         <gesture type="SWIPE" fingers="3" direction="RIGHT">
           <action type="RUN_COMMAND">
-            <command>xdotool key alt+Left</command>
+            <command>xdotool key ctrl+alt+Left</command>
             <repeat>false</repeat>
             <on>end</on>
           </action>
@@ -97,7 +97,7 @@
         <!-- Switch to workspace right with 3-finger swipe left -->
         <gesture type="SWIPE" fingers="3" direction="LEFT">
           <action type="RUN_COMMAND">
-            <command>xdotool key alt+Right</command>
+            <command>xdotool key ctrl+alt+Right</command>
             <repeat>false</repeat>
             <on>end</on>
           </action>
@@ -106,7 +106,7 @@
         <!-- Switch to workspace left with 4-finger swipe right -->
         <gesture type="SWIPE" fingers="4" direction="RIGHT">
           <action type="RUN_COMMAND">
-            <command>xdotool key alt+Left</command>
+            <command>xdotool key ctrl+alt+Left</command>
             <repeat>false</repeat>
             <on>end</on>
           </action>
@@ -115,7 +115,7 @@
         <!-- Switch to workspace right with 4-finger swipe left -->
         <gesture type="SWIPE" fingers="4" direction="LEFT">
           <action type="RUN_COMMAND">
-            <command>xdotool key alt+Right</command>
+            <command>xdotool key ctrl+alt+Right</command>
             <repeat>false</repeat>
             <on>end</on>
           </action>

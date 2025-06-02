@@ -2,15 +2,14 @@
   pkgs,
   lib,
   config,
-# inputs,
+  # inputs,
   ...
-}: 
+}:
 #
 #
 #
 # let
 #  unstable = inputs.nixos-unstable.legacyPackages.${pkgs.system}; # Use legacyPackages and pkgs.system
-
 #  unstable = import <nixos-unstable> {
 #    config = {
 #      allowUnfree = true;
@@ -20,7 +19,7 @@
 #
 #
 #
- {
+{
   programs.vscode = {
     enable = true; # lib.mkForce true;
     package = pkgs.vscode; # lib.mkForce unstable.vscode; # pkgs.vscode-fhs; # pkgs.vscode; # package = pkgs.vscodium;
@@ -44,18 +43,18 @@
     # ];
     # --- Optional: Manage User Settings (settings.json) ---
     profiles.default.userSettings = {
-      "chat.editor.fontSize" = 8;
+      "chat.editor.fontSize" = 9;
       "diffEditor.ignoreTrimWhitespace" = true;
       "editor.fontFamily" = "'SF Mono', 'monospace', monospace";
       "editor.fontLigatures" = true;
-      "editor.fontSize" = 8;
+      "editor.fontSize" = 9;
       "editor.minimap.enabled" = false;
       "explorer.confirmDelete" = false;
       "explorer.confirmDragAndDrop" = false;
       "files.autoSave" = "onFocusChange";
       "git.autofetch" = true;
       "git.confirmSync" = false;
-      # "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
+      "nix.enableLanguageServer" = true; # If using bbenoist.nix extension
       "telemetry.telemetryLevel" = "off";
       # "terminal.integrated.allowRoot" = true;
       "terminal.integrated.copyOnSelection" = true;
@@ -63,7 +62,7 @@
       "terminal.integrated.enablePersistentSessions" = false;
       "terminal.integrated.enableMultiLinePasteWarning" = "never";
       "terminal.integrated.fontFamily" = "'SF Mono', 'monospace', monospace";
-      "terminal.integrated.fontSize" = 8;
+      "terminal.integrated.fontSize" = 9;
       "terminal.integrated.inheritEnv" = true;
       "terminal.integrated.profiles.linux" = {
         "zsh" = {
@@ -79,7 +78,7 @@
           "path" = "${pkgs.zsh}/bin/zsh";
         };
       };
-      "terminal.integrated.sendKeybindingsToShell"= true;      
+      "terminal.integrated.sendKeybindingsToShell" = true;
       "terminal.integrated.shellIntegration.enabled" = true;
       "update.mode" = "manual";
       "update.showReleaseNotes" = false;

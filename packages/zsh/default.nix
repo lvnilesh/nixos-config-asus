@@ -62,9 +62,9 @@
       update = "cd ~/nixos-config && nix flake update && sudo nixos-rebuild switch --flake .#asus"; # Change hostname
 
       # Other helpful aliases
-      cat = "bat";
-      find = "fd";
-      grep = "rg";
+      # cat = "bat";
+      # find = "fd";
+      # grep = "rg";
       ip = "ip -color=auto";
       k = "kubectl";
 
@@ -77,9 +77,16 @@
     };
     envExtra = ''
       export ZOMEZSHVARIABLE="something";
+      # export MAMBA_ROOT_PREFIX="/home/cloudgenius/micromamba"
+      export MAMBA_ROOT_PREFIX="$HOME/.local/share/micromamba"
+      export LD_LIBRARY_PATH="/run/current-system/sw/lib:$LD_LIBRARY_PATH" # for pipx install shelloracle
+      # export LD_PRELOAD=/run/current-system/sw/lib/libtcmalloc.so # for tcmalloc via gperftools
+      # caution: LD_PRELOAD causes trouble with ssh
     '';
     # Add code to run near the end of zsh initialization
     initContent = ''
+
+      eval "$(micromamba shell hook --shell zsh)"
 
       # Enable Powerlevel10k instant prompt
       if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then

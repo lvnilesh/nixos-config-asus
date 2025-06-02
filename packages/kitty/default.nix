@@ -8,7 +8,7 @@
       bold_font = "SF Mono Bold";
       italic_font = "SF Mono Italic";
       bold_italic_font = "SF Mono Bold Italic";
-      font_size = 8;
+      font_size = 9;
       adjust_line_height = 0;
       adjust_column_width = 0;
       # Window layout
