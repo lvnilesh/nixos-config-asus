@@ -85,8 +85,9 @@
       "window.zoomLevel" = 0;
       "workbench.activityBar.location" = "top";
       "workbench.colorTheme" = "Catppuccin Mocha";
-      "workbench.startupEditor" = "none";
       "workbench.editor.enablePreview" = false;
+      "workbench.editor.tabActionLocation" = "left";
+      "workbench.startupEditor" = "none";
     };
   };
 }
